@@ -1,0 +1,5 @@
+class ArgKeyConstants{
+  static const String coverImages = 'cover-imgs';
+  static const String diTichMap = 'di-tich-map';
+  static const String diTichModel= 'di-tich';
+}
