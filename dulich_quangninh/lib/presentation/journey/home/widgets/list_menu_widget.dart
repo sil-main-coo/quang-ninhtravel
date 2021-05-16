@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dulichquangninh/common/constants/image_constants.dart';
 import 'package:dulichquangninh/presentation/journey/route/argument_key_constants.dart';
 import 'package:dulichquangninh/presentation/journey/route/named_routers.dart';
+import 'package:dulichquangninh/presentation/journey/widgets/loader/circular_progress_widget.dart';
 import 'package:dulichquangninh/presentation/journey/widgets/space_widgets/vertical_space_widget.dart';
 import 'package:dulichquangninh/presentation/theme/theme_color.dart';
 import 'package:dulichquangninh/presentation/theme/theme_text.dart';
@@ -70,8 +72,11 @@ class ListMenuHomeWidget extends StatelessWidget {
                   fit: BoxFit.fill,
                   width: ScreenUtil().screenWidth,
                 )
-              : Image.network(
-                  image,
+              : CachedNetworkImage(
+                  imageUrl: image,
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      AppCircularProgress(downloadProgress.progress),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
                   fit: BoxFit.fill,
                   width: ScreenUtil().screenWidth,
                 ),
@@ -113,8 +118,12 @@ class ListMenuHomeWidget extends StatelessWidget {
                       fit: BoxFit.fill,
                       width: ScreenUtil().screenWidth,
                     )
-                  : Image.network(
-                      diTich.images[0],
+                  : CachedNetworkImage(
+                      imageUrl: diTich.images[0],
+                      progressIndicatorBuilder:
+                          (context, url, downloadProgress) =>
+                              AppCircularProgress(downloadProgress.progress),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
                       fit: BoxFit.fill,
                       width: ScreenUtil().screenWidth,
                     ),

@@ -16,8 +16,8 @@ class DiemDuLichSource {
       debugPrint('getAllDiemDuLich : ${snapshot.value}');
 
       if (snapshot.value != null) {
-        final map = snapshot.value as Map;
-        map.forEach((key, value) {
+        final listValue = snapshot.value as List;
+        listValue.forEach((value) {
           list.add(DiemDuLichModel.fromJson(value));
         });
       }

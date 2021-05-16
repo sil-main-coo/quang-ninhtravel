@@ -1,5 +1,6 @@
 import 'package:dulichquangninh/common/injector/get_it.dart';
 import 'package:dulichquangninh/presentation/app.dart';
+import 'package:dulichquangninh/presentation/journey/diem_du_lich/diem_du_lich_screen.dart';
 import 'package:dulichquangninh/presentation/journey/ditich_detail/di_tich_detail_screen.dart';
 import 'package:dulichquangninh/presentation/journey/home/home_screen.dart';
 import 'package:dulichquangninh/presentation/journey/luu_tru/bloc/luu_tru_bloc.dart';
@@ -52,23 +53,30 @@ RouteFactory routers() {
           transitionDuration: Duration(milliseconds: 1000),
           pageBuilder: (BuildContext context, Animation<double> animation,
               Animation<double> secondaryAnimation) {
-            return BlocProvider<LuuTruBloc>(
-              create: (_) => locator<LuuTruBloc>()..add(GetLuuTruData()),
-              child: LuuTruScreen(),
-            );
+            return LuuTruScreen();
           },
           transitionsBuilder: (BuildContext context,
               Animation<double> animation,
               Animation<double> secondaryAnimation,
               Widget child) {
             return Align(
-              child: FadeTransition(
-                opacity: animation,
-                child: BlocProvider<LuuTruBloc>(
-                  create: (_) => locator<LuuTruBloc>()..add(GetLuuTruData()),
-                  child: child,
-                ),
-              ),
+              child: FadeTransition(opacity: animation, child: child),
+            );
+          },
+        );
+      case NamedRouters.diemDuLichScreen:
+        return PageRouteBuilder(
+          transitionDuration: Duration(milliseconds: 1000),
+          pageBuilder: (BuildContext context, Animation<double> animation,
+              Animation<double> secondaryAnimation) {
+            return DiemDuLichScreen();
+          },
+          transitionsBuilder: (BuildContext context,
+              Animation<double> animation,
+              Animation<double> secondaryAnimation,
+              Widget child) {
+            return Align(
+              child: FadeTransition(opacity: animation, child: child),
             );
           },
         );

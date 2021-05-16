@@ -1,3 +1,4 @@
+import 'package:dulichquangninh/providers/models/parents/location_model.dart';
 import 'package:equatable/equatable.dart';
 
 class DiTichModel extends Equatable {
@@ -9,8 +10,9 @@ class DiTichModel extends Equatable {
   String video;
   String html;
   List<String> images;
+  LocationModel location;
 
-  DiTichModel({this.name, this.tag, this.type, this.video});
+  DiTichModel({this.name, this.tag, this.type, this.video, this.location});
 
   DiTichModel.fromJson(String id, Map json) {
     this.id = id;
@@ -22,6 +24,9 @@ class DiTichModel extends Equatable {
     typeName = json['type-name'];
     images = json['images'];
     video = json['video'];
+    if (json['location'] != null) {
+      location = LocationModel.fromJson(json['location']);
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -35,6 +40,7 @@ class DiTichModel extends Equatable {
     data['images'] = this.images;
     data['video'] = this.video;
     data['images'] = this.images;
+    data['location'] = this.location.toJson();
     return data;
   }
 

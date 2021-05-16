@@ -6,7 +6,7 @@ class Contact {
 
   Contact({this.fullName, this.position, this.phone});
 
-  Contact.fromJson(Map<String, dynamic> json) {
+  Contact.fromJson(Map json) {
     fullName = json['full-name'];
     position = json['position'];
     phone = json['phone'].cast<String>();

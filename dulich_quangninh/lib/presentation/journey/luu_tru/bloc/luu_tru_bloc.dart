@@ -16,6 +16,8 @@ class LuuTruBloc extends Bloc<LuuTruEvent, LuuTruState> {
 
   final LuuTruRepo luuTruRepo;
 
+  Map<LoaiLuuTruModel, List<LuuTruModel>> _mapLuuTru;
+
   @override
   Stream<LuuTruState> mapEventToState(
     LuuTruEvent event,
@@ -23,9 +25,11 @@ class LuuTruBloc extends Bloc<LuuTruEvent, LuuTruState> {
     if (event is GetLuuTruData) {
       yield LuuTruUnKnowState();
       try {
-        final luuTrus = await luuTruRepo.getAllLuuTru();
-        yield LuuTruLoadedState(mapLuuTru: luuTrus);
+        if (_mapLuuTru == null || _mapLuuTru.isEmpty)
+          _mapLuuTru = await luuTruRepo.getAllLuuTru();
+        yield LuuTruLoadedState(mapLuuTru: _mapLuuTru);
       } catch (e) {
+        debugPrint(e.toString());
         yield LuuTruFailureState();
       }
     }

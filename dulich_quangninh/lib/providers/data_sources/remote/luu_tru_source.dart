@@ -37,11 +37,22 @@ class LuuTruSource {
       debugPrint('getLuuTruByType : ${snapshot.value}');
 
       if (snapshot.value != null) {
-        final map = Map<dynamic, dynamic>.from(snapshot.value);
-        map.forEach((key, value) async {
-          final diTich = LuuTruModel.fromJson(key, value);
-          list.add(diTich);
-        });
+        if (snapshot.value is List) {
+          for (var value in snapshot.value) {
+            if (value != null) {
+              final mapValue = Map.from(value);
+              final diTich = LuuTruModel.fromJson(null, mapValue);
+              list.add(diTich);
+            }
+          }
+        } else {
+          final map = Map<dynamic, dynamic>.from(snapshot.value);
+          for(var entry in map.entries){
+            final mapValue = Map.from(entry.value);
+            final diTich = LuuTruModel.fromJson(entry.key, mapValue);
+            list.add(diTich);
+          }
+        }
       }
       return list;
     } catch (e) {

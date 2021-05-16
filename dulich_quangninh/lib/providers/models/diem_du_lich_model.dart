@@ -4,7 +4,7 @@ import 'parents/service_model.dart';
 class DiemDuLichModel extends ServiceModel with EquatableMixin {
   List<TravelPrice> priceList;
 
-  DiemDuLichModel.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
+  DiemDuLichModel.fromJson(Map json) : super.fromJson(json) {
     if (json['price'] != null) {
       priceList = [];
       json['price'].forEach((v) {
@@ -32,7 +32,7 @@ class TravelPrice {
 
   TravelPrice({this.name, this.amount});
 
-  TravelPrice.fromJson(Map<String, dynamic> json) {
+  TravelPrice.fromJson(Map json) {
     name = json['name'];
     amount = json['amount'];
   }

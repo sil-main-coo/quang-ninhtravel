@@ -26,10 +26,11 @@ class _HomeScreenState extends State<HomeScreen> {
           physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
+              VerticalSpace.init4(),
               HeaderHomeWidget(widget.coverImages),
               VerticalSpace.init8(),
               ButtonHomeWidget(),
-              VerticalSpace.init16(),
+              VerticalSpace.init8(),
               ListMenuHomeWidget(widget.mapDiTichs)
             ],
           ),

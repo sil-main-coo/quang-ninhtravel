@@ -1,7 +1,6 @@
 import 'package:dulichquangninh/common/injector/get_it.dart';
 import 'package:dulichquangninh/common/navigation/lifecycle_event_handler.dart';
 import 'package:dulichquangninh/presentation/journey/route/named_routers.dart';
-import 'package:dulichquangninh/presentation/journey/splash_screen/splash_screen.dart';
 import 'package:dulichquangninh/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

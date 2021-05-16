@@ -1,9 +1,7 @@
-import 'dart:async';
 import 'dart:io';
 
+import 'package:dulichquangninh/common/utils/map_util.dart';
 import 'package:dulichquangninh/providers/models/di_tich_model.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -59,15 +57,36 @@ class _DiTichDetailScreenState extends State<DiTichDetailScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(widget.diTichModel.name),
+          automaticallyImplyLeading: false,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.close),
+              onPressed: () => Navigator.pop(context),
+            )
+          ],
+        ),
+        floatingActionButton: Visibility(
+          visible: widget.diTichModel.location != null,
+          child: RawMaterialButton(
+            onPressed: () {
+              MapUtil.openMap(widget.diTichModel.location.lat,
+                  widget.diTichModel.location.long);
+            },
+            elevation: 2.0,
+            fillColor: Colors.orange,
+            child: Icon(
+              Icons.directions,
+              color: Colors.white,
+              size: 35.0,
+            ),
+            padding: EdgeInsets.all(15.0),
+            shape: CircleBorder(),
+          ),
         ),
         body: SafeArea(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-//            Container(
-//              height: 300,
-//              color: Colors.red,
-//            ),
               widget.diTichModel.video != null
                   ? Padding(
                       padding: const EdgeInsets.all(4.0),

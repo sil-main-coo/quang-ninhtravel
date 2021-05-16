@@ -50,7 +50,7 @@ class AppColor {
   static const Color pinkF2C8DC = Color(0xffF2C8DC);
   static const Color redAccent = Color.fromRGBO(253, 126, 126, 1);
   static const Color redAccentF5D3D4 = Color(0xffF5D3D4);
-  static const Color orange = Color.fromRGBO(240, 141, 69, 1);
+  static const Color orange = Colors.orange;
   static const Color orangeF2D8C2 = Color(0xffF2D8C2);
   static const Color green = Color.fromRGBO(60, 224, 155, 1);
   static const Color activeColor = Color(0xff20d760);

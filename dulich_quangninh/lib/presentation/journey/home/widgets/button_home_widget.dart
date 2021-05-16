@@ -13,16 +13,22 @@ class ButtonHomeWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buttonWidget('hero',Icons.single_bed, 'Lưu trú',
+          _buttonWidget('hero', Icons.single_bed, 'Lưu trú',
               () => Navigator.pushNamed(context, NamedRouters.luuTruScreen)),
-          _buttonWidget('hero1',Icons.location_on, 'Điểm du lịch', () {}),
-          _buttonWidget('hero2',Icons.map, 'Bản đồ', () {}),
+          _buttonWidget(
+              'hero1',
+              Icons.location_on,
+              'Điểm du lịch',
+              () =>
+                  Navigator.pushNamed(context, NamedRouters.diemDuLichScreen)),
+//          _buttonWidget('hero2', Icons.map, 'Bản đồ', () {}),
         ],
       ),
     );
   }
 
-  Widget _buttonWidget(String tag,IconData iconData, String text, Function function) {
+  Widget _buttonWidget(
+      String tag, IconData iconData, String text, Function function) {
     return Hero(
       tag: tag,
       child: RaisedButton(

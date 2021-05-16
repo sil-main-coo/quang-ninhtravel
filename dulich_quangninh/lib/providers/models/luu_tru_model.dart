@@ -5,7 +5,7 @@ class LuuTruModel extends ServiceModel with EquatableMixin {
   RoomPrice roomPrices;
   String id;
 
-  LuuTruModel.fromJson(var id, Map<String, dynamic> json)
+  LuuTruModel.fromJson(var id, Map json)
       : super.fromJson(json) {
     roomPrices =
         json['price'] != null ? new RoomPrice.fromJson(json['price']) : null;
@@ -32,7 +32,7 @@ class RoomPrice extends Equatable {
 
   RoomPrice({this.singleValue, this.doubleValue});
 
-  RoomPrice.fromJson(Map<String, dynamic> json) {
+  RoomPrice.fromJson(Map json) {
     singleValue = json['single'];
     doubleValue = json['double'];
   }
