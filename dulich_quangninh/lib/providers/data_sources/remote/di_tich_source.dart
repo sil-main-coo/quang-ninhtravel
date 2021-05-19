@@ -49,7 +49,7 @@ class DiTichSource {
         map.forEach((key, value) async {
           final diTich = DiTichModel.fromJson(key, value);
           diTich.images = await _getImageURLs(diTich.type, diTich.tag);
-          diTich.html = await _getDescriptionURL(diTich.type, diTich.tag);
+          // diTich.html = await _getDescriptionURL(diTich.type, diTich.tag);
           list.add(diTich);
         });
       }
