@@ -26,6 +26,12 @@ class ListMenuHomeWidget extends StatelessWidget {
         loaiDiTichs.indexWhere((element) => element.tag == 'khai-quat');
     this.loaiDiTichs.insert(0, loaiDiTichs[indexIntro]);
     this.loaiDiTichs.removeAt(indexIntro + 1);
+
+    // đưa di tích xuống dưới
+    final indexDiTich =
+        loaiDiTichs.indexWhere((element) => element.tag == 'nha-tran');
+    this.loaiDiTichs.add(loaiDiTichs[indexDiTich]);
+    this.loaiDiTichs.removeAt(indexDiTich);
   }
 
   @override
