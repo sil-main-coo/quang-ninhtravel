@@ -4,7 +4,7 @@ import 'package:dulichquangninh/providers/models/loai_luu_tru_model.dart';
 import 'package:dulichquangninh/providers/models/luu_tru_model.dart';
 import 'package:flutter/cupertino.dart';
 
-  abstract class LuuTruRepo {
+abstract class LuuTruRepo {
   Future<Map<LoaiLuuTruModel, List<LuuTruModel>>> getAllLuuTru();
 }
 
@@ -19,7 +19,8 @@ class LuuTruRepoImpl implements LuuTruRepo {
   Future<Map<LoaiLuuTruModel, List<LuuTruModel>>> getAllLuuTru() async {
     Map<LoaiLuuTruModel, List<LuuTruModel>> map = {};
 
-    final loaiLuuTrus = await loaiLuuTruSource.getLoaiLuuTrus();
+    final loaiLuuTrus = await loaiLuuTruSource.getLoaiLuuTrus()
+      ..sort((a, b) => a.tag.compareTo(b.tag));
 
     for (var luuTru in loaiLuuTrus) {
       map[luuTru] = await luuTruSource.getLuuTruByType(luuTru.tag);
