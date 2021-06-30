@@ -42,7 +42,7 @@ class _DiTichDetailScreenState extends State<DiTichDetailScreen> {
         initialVideoId: YoutubePlayer.convertUrlToId(widget.diTichModel.video),
         flags: YoutubePlayerFlags(
           autoPlay: true,
-          mute: true,
+          mute: false,
         ),
       );
     _getData();
