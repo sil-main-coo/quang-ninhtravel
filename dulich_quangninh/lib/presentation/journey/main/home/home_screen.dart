@@ -1,10 +1,10 @@
-import 'package:dulichquangninh/presentation/journey/home/widgets/button_home_widget.dart';
-import 'package:dulichquangninh/presentation/journey/home/widgets/header_widget.dart';
 import 'package:dulichquangninh/presentation/journey/widgets/space_widgets/vertical_space_widget.dart';
 import 'package:dulichquangninh/providers/models/di_tich_model.dart';
 import 'package:dulichquangninh/providers/models/loai_di_tich_model.dart';
 import 'package:flutter/material.dart';
 
+import 'widgets/button_home_widget.dart';
+import 'widgets/header_widget.dart';
 import 'widgets/list_menu_widget.dart';
 
 class HomeScreen extends StatefulWidget {

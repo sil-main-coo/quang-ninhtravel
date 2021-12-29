@@ -8,7 +8,7 @@ class AppLoaderDialog {
         context: context,
         barrierDismissible: false,
         builder: (thisContext) {
-            _context = thisContext;
+          _context = thisContext;
           return Center(
             child: SizedBox(
                 height: 50, width: 50, child: CircularProgressIndicator()),
@@ -16,10 +16,7 @@ class AppLoaderDialog {
         });
   }
 
-  void hide() {
-    if(_context!=null) {
-      Navigator.pop(_context);
-      _context = null;
-    }
+  void hide(BuildContext context) {
+    Navigator.pop(context);
   }
 }

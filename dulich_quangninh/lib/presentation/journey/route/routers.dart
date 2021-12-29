@@ -1,11 +1,14 @@
 import 'package:dulichquangninh/common/injector/get_it.dart';
 import 'package:dulichquangninh/presentation/app.dart';
+import 'package:dulichquangninh/presentation/blocs/app_bloc/app_bloc.dart';
+import 'package:dulichquangninh/presentation/journey/am_thuc/am_thuc_screen.dart';
 import 'package:dulichquangninh/presentation/journey/diem_du_lich/diem_du_lich_screen.dart';
 import 'package:dulichquangninh/presentation/journey/ditich_detail/di_tich_detail_screen.dart';
-import 'package:dulichquangninh/presentation/journey/home/home_screen.dart';
-import 'package:dulichquangninh/presentation/journey/luu_tru/bloc/luu_tru_bloc.dart';
 import 'package:dulichquangninh/presentation/journey/luu_tru/luu_tru_screen.dart';
+import 'package:dulichquangninh/presentation/journey/main/main_screen.dart';
 import 'package:dulichquangninh/presentation/journey/route/named_routers.dart';
+import 'package:dulichquangninh/presentation/journey/sign_in/sign_in_screen.dart';
+import 'package:dulichquangninh/presentation/journey/sign_up/sign_up_screen.dart';
 import 'package:dulichquangninh/presentation/journey/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,14 +23,25 @@ RouteFactory routers() {
       case '/':
         return MaterialPageRoute(builder: (context) => App());
       case NamedRouters.splashScreen:
-        return MaterialPageRoute(builder: (context) => SplashScreen());
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider.value(
+                  value: locator<AppBloc>()
+                    ..add(GetApplicationData()),
+                  child: SplashScreen(),
+                ));
         break;
-      case NamedRouters.homeScreen:
+      case NamedRouters.signInScreen:
+        return MaterialPageRoute(builder: (context) => SignInScreen());
+        break;
+      case NamedRouters.signUpScreen:
+        return MaterialPageRoute(builder: (context) => SignUpScreen());
+        break;
+      case NamedRouters.mainScreen:
         final coverImages = args[ArgKeyConstants.coverImages];
         final mapDiTich = args[ArgKeyConstants.diTichMap];
 
         return MaterialPageRoute(
-            builder: (context) => HomeScreen(coverImages, mapDiTich));
+            builder: (context) => MainScreen(coverImages, mapDiTich));
       case NamedRouters.diTichDetailScreen:
         final diTichModel = args[ArgKeyConstants.diTichModel];
         return PageRouteBuilder(
@@ -70,6 +84,22 @@ RouteFactory routers() {
           pageBuilder: (BuildContext context, Animation<double> animation,
               Animation<double> secondaryAnimation) {
             return DiemDuLichScreen();
+          },
+          transitionsBuilder: (BuildContext context,
+              Animation<double> animation,
+              Animation<double> secondaryAnimation,
+              Widget child) {
+            return Align(
+              child: FadeTransition(opacity: animation, child: child),
+            );
+          },
+        );
+      case NamedRouters.amThucScreen:
+        return PageRouteBuilder(
+          transitionDuration: Duration(milliseconds: 1000),
+          pageBuilder: (BuildContext context, Animation<double> animation,
+              Animation<double> secondaryAnimation) {
+            return AmThucScreen();
           },
           transitionsBuilder: (BuildContext context,
               Animation<double> animation,

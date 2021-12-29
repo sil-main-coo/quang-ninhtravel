@@ -19,7 +19,7 @@ class SplashScreen extends StatelessWidget {
               final typeState = state as AppDataLoadedState;
 
               Navigator.pushNamedAndRemoveUntil(
-                  context, NamedRouters.homeScreen, (route) => false,
+                  context, NamedRouters.mainScreen, (route) => false,
                   arguments: {
                     ArgKeyConstants.coverImages: typeState.coverImages,
                     ArgKeyConstants.diTichMap: typeState.mapDiTichs

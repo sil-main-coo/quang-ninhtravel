@@ -11,6 +11,7 @@ class DiemDuLichModel extends ServiceModel with EquatableMixin {
         priceList.add(new TravelPrice.fromJson(v));
       });
     }
+
   }
 
   Map<String, dynamic> toJson() {

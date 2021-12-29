@@ -1,4 +1,6 @@
 import 'package:dulichquangninh/common/constants/firebase_constants.dart';
+import 'package:dulichquangninh/common/error/remote_exception.dart';
+import 'package:dulichquangninh/providers/models/comment.dart';
 import 'package:dulichquangninh/providers/models/di_tich_model.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -10,9 +12,31 @@ class DiTichSource {
       .child(FirebaseConstants.diTichsCollect);
 
   final _refImageStorage =
-  FirebaseStorage.instance.ref().child(FirebaseConstants.imagesStorage);
+      FirebaseStorage.instance.ref().child(FirebaseConstants.imagesStorage);
   final _refHtmlStorage =
-  FirebaseStorage.instance.ref().child(FirebaseConstants.htmlStorage);
+      FirebaseStorage.instance.ref().child(FirebaseConstants.htmlStorage);
+
+  Stream<Event> streamCommentsWithID(String id) {
+    return _databaseReference
+        .child(id)
+        .child(FirebaseConstants.comments)
+        .onValue;
+  }
+
+  Future<Comment> addNewCommentToDB(String id, Comment comment) async {
+    try {
+      final ref =
+          _databaseReference.child(id).child(FirebaseConstants.comments);
+      final cmtID = ref.push();
+      comment.id = cmtID.key;
+      await cmtID.set(comment.toJson());
+      return comment;
+    } on RemoteException catch (e) {
+      throw e.toString();
+    } catch (e) {
+      throw RemoteException('Thêm nhận xét thất bại');
+    }
+  }
 
   Future<List<DiTichModel>> getAllDiTich() async {
     List<DiTichModel> list = [];

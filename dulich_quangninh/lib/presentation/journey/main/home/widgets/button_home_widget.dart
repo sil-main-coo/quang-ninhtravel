@@ -1,9 +1,11 @@
+import 'package:dulichquangninh/common/constants/icon_constants.dart';
 import 'package:dulichquangninh/presentation/journey/route/named_routers.dart';
 import 'package:dulichquangninh/presentation/journey/widgets/space_widgets/vertical_space_widget.dart';
 import 'package:dulichquangninh/presentation/theme/theme_color.dart';
 import 'package:dulichquangninh/presentation/theme/theme_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ButtonHomeWidget extends StatelessWidget {
   @override
@@ -13,14 +15,21 @@ class ButtonHomeWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buttonWidget('hero', Icons.single_bed, 'Lưu trú',
-              () => Navigator.pushNamed(context, NamedRouters.luuTruScreen)),
+          _buttonWidget('hero', IconConstants.icHotel, 'Lưu trú',
+              () => Navigator.pushNamed(context, NamedRouters.luuTruScreen),
+              size: 64.w),
           _buttonWidget(
               'hero1',
-              Icons.location_on,
+              IconConstants.icLocation,
               'Điểm du lịch',
               () =>
                   Navigator.pushNamed(context, NamedRouters.diemDuLichScreen)),
+          _buttonWidget(
+              'hero2',
+              IconConstants.icFood,
+              'Đặc sản',
+              () =>
+                  Navigator.pushNamed(context, NamedRouters.amThucScreen)),
 //          _buttonWidget('hero2', Icons.map, 'Bản đồ', () {}),
         ],
       ),
@@ -28,7 +37,8 @@ class ButtonHomeWidget extends StatelessWidget {
   }
 
   Widget _buttonWidget(
-      String tag, IconData iconData, String text, Function function) {
+      String tag, String iconPath, String text, Function function,
+      {double size}) {
     return Hero(
       tag: tag,
       child: RaisedButton(
@@ -37,9 +47,10 @@ class ButtonHomeWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              iconData,
-              color: AppColor.primaryColor,
+            SvgPicture.asset(
+              iconPath,
+              width: size?? 48.w,
+              height: size?? 48.w,
             ),
             VerticalSpace.init4(),
             Text(

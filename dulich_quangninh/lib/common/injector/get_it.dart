@@ -1,6 +1,9 @@
+import 'package:dulichquangninh/common/session/shared_pref_manager.dart';
 import 'package:dulichquangninh/presentation/blocs/app_bloc/app_bloc.dart';
+import 'package:dulichquangninh/presentation/blocs/auth_bloc/auth_cubit.dart';
 import 'package:dulichquangninh/presentation/journey/diem_du_lich/bloc/diem_du_lich_bloc.dart';
 import 'package:dulichquangninh/presentation/journey/luu_tru/bloc/luu_tru_bloc.dart';
+import 'package:dulichquangninh/providers/data_sources/remote/auth_remote_provider.dart';
 import 'package:dulichquangninh/providers/data_sources/remote/di_tich_source.dart';
 import 'package:dulichquangninh/providers/data_sources/remote/diem_du_lich_source.dart';
 import 'package:dulichquangninh/providers/data_sources/remote/image_storage_source.dart';
@@ -18,6 +21,7 @@ GetIt locator = GetIt.instance;
 void setupLocator() {
   locator.registerLazySingleton(
       () => AppBloc(diTichRepo: locator(), imageRepo: locator()));
+  locator.registerLazySingleton(() => AuthCubit());
   locator.registerLazySingleton(() => LuuTruBloc(luuTruRepo: locator()));
   locator
       .registerLazySingleton(() => DiemDuLichBloc(diemDuLichRepo: locator()));
@@ -41,4 +45,7 @@ void setupLocator() {
   locator.registerFactory(() => LoaiLuuTruSource());
   locator.registerFactory(() => LuuTruSource());
   locator.registerFactory(() => ImageStorageSource());
+  locator.registerFactory(() => AuthRemoteProvider());
+
+  locator.registerSingleton(SharedPreferencesManager());
 }

@@ -12,4 +12,6 @@ class FirebaseConstants{
   static const String imagesStorage = '$appStorageKey/images';
   static const String htmlStorage = '$appStorageKey/html-file';
 
+  static const String comments = 'comments';
+
 }

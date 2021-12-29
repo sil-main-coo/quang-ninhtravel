@@ -1,9 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dulichquangninh/common/injector/get_it.dart';
+import 'package:dulichquangninh/presentation/journey/widgets/comments/comment_component.dart';
 import 'package:dulichquangninh/presentation/journey/widgets/loader/loader_widget.dart';
 import 'package:dulichquangninh/presentation/journey/widgets/space_widgets/vertical_space_widget.dart';
 import 'package:dulichquangninh/presentation/theme/theme_text.dart';
+import 'package:dulichquangninh/providers/data_sources/remote/di_tich_source.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dulichquangninh/common/constants/firebase_constants.dart';
 import 'package:dulichquangninh/common/utils/map_util.dart';
@@ -30,8 +33,8 @@ class _DiTichDetailScreenState extends State<DiTichDetailScreen> {
       FirebaseStorage.instance.ref().child(FirebaseConstants.htmlStorage);
 
   String htmlData = '';
-
   bool _isLoading = true;
+  final _diTichSource = locator.get<DiTichSource>();
 
   @override
   void initState() {
@@ -82,14 +85,8 @@ class _DiTichDetailScreenState extends State<DiTichDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.diTichModel.name),
-        automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.close),
-            onPressed: () => Navigator.pop(context),
-          )
-        ],
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       floatingActionButton: Visibility(
         visible: widget.diTichModel.location != null,
         child: RawMaterialButton(
@@ -114,8 +111,17 @@ class _DiTichDetailScreenState extends State<DiTichDetailScreen> {
             : SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
-                  children: [_headerWidget(), _htmlWidget()],
+                  children: [
+                    _headerWidget(),
+                    _htmlWidget(),
+                    CommentComponent(
+                      idPost: widget.diTichModel.id,
+                      streamComments: _diTichSource
+                          .streamCommentsWithID(widget.diTichModel.id),
+                    )
+                  ],
                 ),
               ),
       ),
@@ -236,13 +242,15 @@ class _DiTichDetailScreenState extends State<DiTichDetailScreen> {
     final bodyStyle = Style(fontSize: FontSize(26.sp));
     final bodyBoldStyle =
         Style(fontSize: FontSize(26.sp), fontWeight: FontWeight.bold);
-    return Html(
-      data: htmlData ?? '',
-      style: {
-        "sup": Style(fontSize: FontSize(16.sp)),
-        'p': bodyStyle,
-        'strong': bodyBoldStyle,
-      },
+    return Card(
+      child: Html(
+        data: htmlData ?? '',
+        style: {
+          "sup": Style(fontSize: FontSize(16.sp)),
+          'p': bodyStyle,
+          'strong': bodyBoldStyle,
+        },
+      ),
     );
   }
 }

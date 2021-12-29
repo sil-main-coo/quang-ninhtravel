@@ -1,6 +1,9 @@
 import 'package:dulichquangninh/common/injector/get_it.dart';
 import 'package:dulichquangninh/common/navigation/lifecycle_event_handler.dart';
+import 'package:dulichquangninh/presentation/blocs/auth_bloc/auth_cubit.dart';
 import 'package:dulichquangninh/presentation/journey/route/named_routers.dart';
+import 'package:dulichquangninh/presentation/journey/sign_in/sign_in_screen.dart';
+import 'package:dulichquangninh/presentation/journey/splash_screen/splash_screen.dart';
 import 'package:dulichquangninh/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +23,9 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   List<BlocProvider> _getProviders() => [
         BlocProvider<AppBloc>(
-            create: (_) => locator<AppBloc>()..add(GetApplicationData()))
+            create: (_) => locator<AppBloc>()),
+        BlocProvider<AuthCubit>(
+            create: (_) => locator<AuthCubit>()..checkAuth())
       ];
 
   /// ==== INIT LISTENER OF APPLICATION
@@ -28,6 +33,7 @@ class _AppState extends State<App> {
   void initState() {
     WidgetsBinding.instance
         .addObserver(LifecycleEventHandler(onPaused: _onPause));
+    locator<AppBloc>()..add(GetApplicationData());
     super.initState();
   }
 
@@ -48,15 +54,25 @@ class _AppState extends State<App> {
           },
           child: MaterialApp(
             navigatorKey: App.navigator,
-//            localizationsDelegates: [],
-//          supportedLocales: const [
-//            Locale(LanguageConstants.en),
-//            Locale(LanguageConstants.vn),
-//          ],
             title: 'Du lịch Đông Triều',
             theme: appTheme(buildContext),
             onGenerateRoute: routers(),
-            initialRoute: NamedRouters.splashScreen,
+            home: BlocBuilder<AuthCubit, AuthState>(
+              builder: (context, state) {
+                if (state is AuthLoaded) {
+                  if (state.user != null) {
+                    return SplashScreen();
+                  }
+                  return SignInScreen();
+                }
+
+                return Scaffold(
+                  body: Center(
+                    child: const CircularProgressIndicator(),
+                  ),
+                );
+              },
+            ),
           ),
         ),
       ),
