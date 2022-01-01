@@ -24,12 +24,8 @@ class ButtonHomeWidget extends StatelessWidget {
               'Điểm du lịch',
               () =>
                   Navigator.pushNamed(context, NamedRouters.diemDuLichScreen)),
-          _buttonWidget(
-              'hero2',
-              IconConstants.icFood,
-              'Đặc sản',
-              () =>
-                  Navigator.pushNamed(context, NamedRouters.amThucScreen)),
+          _buttonWidget('hero2', IconConstants.icFood, 'Đặc sản',
+              () => Navigator.pushNamed(context, NamedRouters.dacSanScreen)),
 //          _buttonWidget('hero2', Icons.map, 'Bản đồ', () {}),
         ],
       ),
@@ -49,8 +45,8 @@ class ButtonHomeWidget extends StatelessWidget {
           children: [
             SvgPicture.asset(
               iconPath,
-              width: size?? 48.w,
-              height: size?? 48.w,
+              width: size ?? 48.w,
+              height: size ?? 48.w,
             ),
             VerticalSpace.init4(),
             Text(

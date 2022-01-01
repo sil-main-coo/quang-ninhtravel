@@ -9,31 +9,27 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CommentComponent extends StatelessWidget {
+class CommentComponent<T> extends StatelessWidget {
   CommentComponent(
-      {Key key, @required this.streamComments, @required this.idPost})
+      {Key key,
+      @required this.streamComments,
+      @required this.idPost,
+      @required this.handleComment})
       : super(key: key);
 
   final Stream<Event> streamComments;
   final String idPost;
+  final Function(String) handleComment;
 
   final _commentCtrl = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final _loader = AppLoaderDialog();
 
-  final _diTichSource = locator.get<DiTichSource>();
-  final _authCubit = locator.get<AuthCubit>();
-
   Future _handleComment(BuildContext context) async {
     if (_formKey.currentState.validate()) {
       try {
         _loader.show(context);
-        _diTichSource.addNewCommentToDB(
-            idPost,
-            Comment(
-                uid: _authCubit.user.profile.id,
-                fullName: _authCubit.user.profile.fullName,
-                content: _commentCtrl.text.trim()));
+        handleComment(_commentCtrl.text.trim());
         _loader.hide(context);
         _commentCtrl.clear();
       } catch (e) {
@@ -161,13 +157,15 @@ class CommentComponent extends StatelessWidget {
         SizedBox(
           height: 8.w,
         ),
-        Column(
-          children: comments
-              .map((comment) => ACommentWidget(
-                    comment: comment,
-                  ))
-              .toList(),
-        )
+        comments.isEmpty
+            ? Text('Chưa có bình luận nào.')
+            : Column(
+                children: comments
+                    .map((comment) => ACommentWidget(
+                          comment: comment,
+                        ))
+                    .toList(),
+              )
       ],
     );
   }

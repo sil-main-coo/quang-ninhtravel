@@ -7,12 +7,11 @@ import 'package:dulichquangninh/presentation/journey/widgets/comments/comment_co
 import 'package:dulichquangninh/presentation/journey/widgets/loader/loader_widget.dart';
 import 'package:dulichquangninh/presentation/journey/widgets/space_widgets/vertical_space_widget.dart';
 import 'package:dulichquangninh/presentation/theme/theme_text.dart';
-import 'package:dulichquangninh/providers/data_sources/remote/di_tich_source.dart';
+import 'package:dulichquangninh/providers/data_sources/remote/dac_san_remote_provider.dart';
 import 'package:dulichquangninh/providers/models/comment.dart';
+import 'package:dulichquangninh/providers/models/dac_san_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dulichquangninh/common/constants/firebase_constants.dart';
-import 'package:dulichquangninh/common/utils/map_util.dart';
-import 'package:dulichquangninh/providers/models/di_tich_model.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -20,32 +19,32 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:photo_view/photo_view.dart';
 
-class DiTichDetailScreen extends StatefulWidget {
-  final DiTichModel diTichModel;
+class DacSanDetailScreen extends StatefulWidget {
+  final DacSanModel dacSanModel;
 
-  DiTichDetailScreen(this.diTichModel);
+  DacSanDetailScreen(this.dacSanModel);
 
   @override
-  _DiTichDetailScreenState createState() => _DiTichDetailScreenState();
+  _DacSanDetailScreenState createState() => _DacSanDetailScreenState();
 }
 
-class _DiTichDetailScreenState extends State<DiTichDetailScreen> {
+class _DacSanDetailScreenState extends State<DacSanDetailScreen> {
   YoutubePlayerController _ytbController;
   final _refHtmlStorage =
       FirebaseStorage.instance.ref().child(FirebaseConstants.htmlStorage);
 
   String htmlData = '';
   bool _isLoading = true;
-  final _diTichSource = locator.get<DiTichSource>();
+  final _dacSanSource = locator.get<DacSanSource>();
   final _authCubit = locator.get<AuthCubit>();
 
   @override
   void initState() {
     super.initState();
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
-    if (widget.diTichModel.video != null)
+    if (widget.dacSanModel.video != null)
       _ytbController = YoutubePlayerController(
-        initialVideoId: YoutubePlayer.convertUrlToId(widget.diTichModel.video),
+        initialVideoId: YoutubePlayer.convertUrlToId(widget.dacSanModel.video),
         flags: YoutubePlayerFlags(
           autoPlay: true,
           mute: false,
@@ -60,8 +59,8 @@ class _DiTichDetailScreenState extends State<DiTichDetailScreen> {
 
   void _getData() async {
     final data = await _refHtmlStorage
-        .child(widget.diTichModel.type)
-        .child('${widget.diTichModel.tag}.html')
+        .child(widget.dacSanModel.type)
+        .child('${widget.dacSanModel.tag}.html')
         .getData();
     setState(() {
       _isLoading = false;
@@ -87,26 +86,7 @@ class _DiTichDetailScreenState extends State<DiTichDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.diTichModel.name),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      floatingActionButton: Visibility(
-        visible: widget.diTichModel.location != null,
-        child: RawMaterialButton(
-          onPressed: () {
-            MapUtil.openMap(widget.diTichModel.location.lat,
-                widget.diTichModel.location.long);
-          },
-          elevation: 2.0,
-          fillColor: Colors.orange,
-          child: Icon(
-            Icons.directions,
-            color: Colors.white,
-            size: 35.0,
-          ),
-          padding: EdgeInsets.all(15.0),
-          shape: CircleBorder(),
-        ),
+        title: Text(widget.dacSanModel.name),
       ),
       body: SafeArea(
         child: _isLoading
@@ -120,12 +100,12 @@ class _DiTichDetailScreenState extends State<DiTichDetailScreen> {
                     _headerWidget(),
                     _htmlWidget(),
                     CommentComponent(
-                      idPost: widget.diTichModel.id,
-                      streamComments: _diTichSource
-                          .streamCommentsWithID(widget.diTichModel.id),
+                      idPost: widget.dacSanModel.id,
+                      streamComments: _dacSanSource
+                          .streamCommentsWithID(widget.dacSanModel.id),
                       handleComment: (String content) {
-                        _diTichSource.addNewCommentToDB(
-                            widget.diTichModel.id,
+                        _dacSanSource.addNewCommentToDB(
+                            widget.dacSanModel.id,
                             Comment(
                                 uid: _authCubit.user.profile.id,
                                 fullName: _authCubit.user.profile.fullName,
@@ -155,7 +135,7 @@ class _DiTichDetailScreenState extends State<DiTichDetailScreen> {
   }
 
   Widget _imageSmall() {
-    final images = widget.diTichModel.images;
+    final images = widget.dacSanModel.images;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
       child: Column(
@@ -163,7 +143,7 @@ class _DiTichDetailScreenState extends State<DiTichDetailScreen> {
           Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                '*Một số hình ảnh về ${widget.diTichModel.name}:',
+                '*Một số hình ảnh về ${widget.dacSanModel.name}:',
                 style: ThemeText.getDefaultTextTheme()
                     .body1
                     .copyWith(fontSize: 22.sp),
@@ -182,7 +162,7 @@ class _DiTichDetailScreenState extends State<DiTichDetailScreen> {
                           borderRadius: BorderRadius.all(Radius.circular(5.0)),
                           child: _aImage(
                               images[index],
-                              widget.diTichModel.tag +
+                              widget.dacSanModel.tag +
                                   "img" +
                                   index.toString())))),
             ),
@@ -228,19 +208,19 @@ class _DiTichDetailScreenState extends State<DiTichDetailScreen> {
   Widget _headerWidget() {
     Widget child;
 
-    if (widget.diTichModel.video != null) {
-      if (widget.diTichModel.images.isNotEmpty) {
+    if (widget.dacSanModel.video != null) {
+      if (widget.dacSanModel.images.isNotEmpty) {
         child = _youtubeAndImagesWidget();
       } else {
         child = _youtubePlayer();
       }
     } else {
-      final len = widget.diTichModel.images.length;
+      final len = widget.dacSanModel.images.length;
       if (len == 0) {
         child = SizedBox();
       } else if (len == 1) {
         child = _aImage(
-            widget.diTichModel.images[0], '${widget.diTichModel.tag}img1');
+            widget.dacSanModel.images[0], '${widget.dacSanModel.tag}img1');
       } else {
         child = _imageSmall();
       }

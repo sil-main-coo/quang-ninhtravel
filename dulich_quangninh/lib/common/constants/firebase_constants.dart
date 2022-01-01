@@ -4,6 +4,7 @@ class FirebaseConstants{
   static const String loaiDiTichCollect = 'loai-di-tich';
   static const String loaiLuuTruCollect = 'loai-luu-tru';
   static const String luuTrusCollect = 'luu-trus';
+  static const String dacSansCollect = 'dac-sans';
 
   static const String diTichKey = 'type';
   static const String luuTruKey = 'type';

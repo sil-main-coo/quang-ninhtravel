@@ -1,15 +1,18 @@
 import 'package:dulichquangninh/common/session/shared_pref_manager.dart';
 import 'package:dulichquangninh/presentation/blocs/app_bloc/app_bloc.dart';
 import 'package:dulichquangninh/presentation/blocs/auth_bloc/auth_cubit.dart';
+import 'package:dulichquangninh/presentation/journey/dac_san/bloc/dac_san_bloc.dart';
 import 'package:dulichquangninh/presentation/journey/diem_du_lich/bloc/diem_du_lich_bloc.dart';
 import 'package:dulichquangninh/presentation/journey/luu_tru/bloc/luu_tru_bloc.dart';
 import 'package:dulichquangninh/providers/data_sources/remote/auth_remote_provider.dart';
+import 'package:dulichquangninh/providers/data_sources/remote/dac_san_remote_provider.dart';
 import 'package:dulichquangninh/providers/data_sources/remote/di_tich_source.dart';
 import 'package:dulichquangninh/providers/data_sources/remote/diem_du_lich_source.dart';
 import 'package:dulichquangninh/providers/data_sources/remote/image_storage_source.dart';
 import 'package:dulichquangninh/providers/data_sources/remote/loai_di_tich_source.dart';
 import 'package:dulichquangninh/providers/data_sources/remote/loai_luu_tru_source.dart';
 import 'package:dulichquangninh/providers/data_sources/remote/luu_tru_source.dart';
+import 'package:dulichquangninh/providers/repositories/dac_san_repo.dart';
 import 'package:dulichquangninh/providers/repositories/di_tich_repo.dart';
 import 'package:dulichquangninh/providers/repositories/diem_du_lich_repo.dart';
 import 'package:dulichquangninh/providers/repositories/image_repo.dart';
@@ -25,6 +28,7 @@ void setupLocator() {
   locator.registerLazySingleton(() => LuuTruBloc(luuTruRepo: locator()));
   locator
       .registerLazySingleton(() => DiemDuLichBloc(diemDuLichRepo: locator()));
+  locator.registerLazySingleton(() => DacSanBloc(dacSanRepo: locator()));
 
   // repository
   locator.registerFactory<DiTichRepo>(() => DiTichRepoImpl(
@@ -37,6 +41,8 @@ void setupLocator() {
       LuuTruRepoImpl(luuTruSource: locator(), loaiLuuTruSource: locator()));
   locator.registerFactory<DiemDuLichRepo>(
       () => DiemDuLichRepoImpl(diemDuLichSource: locator()));
+  locator.registerFactory<DacSanRepo>(
+      () => DacSanRepoImpl(dacSanSource: locator()));
 
   // data source
   locator.registerFactory(() => DiTichSource());
@@ -46,6 +52,7 @@ void setupLocator() {
   locator.registerFactory(() => LuuTruSource());
   locator.registerFactory(() => ImageStorageSource());
   locator.registerFactory(() => AuthRemoteProvider());
+  locator.registerFactory(() => DacSanSource());
 
   locator.registerSingleton(SharedPreferencesManager());
 }

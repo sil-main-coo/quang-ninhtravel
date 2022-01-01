@@ -1,7 +1,8 @@
 import 'package:dulichquangninh/common/injector/get_it.dart';
 import 'package:dulichquangninh/presentation/app.dart';
 import 'package:dulichquangninh/presentation/blocs/app_bloc/app_bloc.dart';
-import 'package:dulichquangninh/presentation/journey/am_thuc/am_thuc_screen.dart';
+import 'package:dulichquangninh/presentation/journey/dac_san/dac_san_screen.dart';
+import 'package:dulichquangninh/presentation/journey/dac_san_detail/dac_san_detail_screen.dart';
 import 'package:dulichquangninh/presentation/journey/diem_du_lich/diem_du_lich_screen.dart';
 import 'package:dulichquangninh/presentation/journey/ditich_detail/di_tich_detail_screen.dart';
 import 'package:dulichquangninh/presentation/journey/luu_tru/luu_tru_screen.dart';
@@ -12,7 +13,6 @@ import 'package:dulichquangninh/presentation/journey/sign_up/sign_up_screen.dart
 import 'package:dulichquangninh/presentation/journey/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'argument_key_constants.dart';
 
 RouteFactory routers() {
@@ -25,8 +25,7 @@ RouteFactory routers() {
       case NamedRouters.splashScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider.value(
-                  value: locator<AppBloc>()
-                    ..add(GetApplicationData()),
+                  value: locator<AppBloc>()..add(GetApplicationData()),
                   child: SplashScreen(),
                 ));
         break;
@@ -94,12 +93,12 @@ RouteFactory routers() {
             );
           },
         );
-      case NamedRouters.amThucScreen:
+      case NamedRouters.dacSanScreen:
         return PageRouteBuilder(
           transitionDuration: Duration(milliseconds: 1000),
           pageBuilder: (BuildContext context, Animation<double> animation,
               Animation<double> secondaryAnimation) {
-            return AmThucScreen();
+            return DacSanScreen();
           },
           transitionsBuilder: (BuildContext context,
               Animation<double> animation,
@@ -107,6 +106,26 @@ RouteFactory routers() {
               Widget child) {
             return Align(
               child: FadeTransition(opacity: animation, child: child),
+            );
+          },
+        );
+      case NamedRouters.dacSanDetailScreen:
+        final dacSanModel = args[ArgKeyConstants.dacSanModel];
+        return PageRouteBuilder(
+          transitionDuration: Duration(milliseconds: 1000),
+          pageBuilder: (BuildContext context, Animation<double> animation,
+              Animation<double> secondaryAnimation) {
+            return DacSanDetailScreen(dacSanModel);
+          },
+          transitionsBuilder: (BuildContext context,
+              Animation<double> animation,
+              Animation<double> secondaryAnimation,
+              Widget child) {
+            return Align(
+              child: FadeTransition(
+                opacity: animation,
+                child: child,
+              ),
             );
           },
         );

@@ -6,5 +6,6 @@ class NamedRouters{
   static const String diTichDetailScreen= 'di-tich-detail-screen';
   static const String luuTruScreen= 'luu-tru-screen';
   static const String diemDuLichScreen= 'diem-du-lich-screen';
-  static const String amThucScreen= 'am-thuc-screen';
+  static const String dacSanScreen= 'dac-san-screen';
+  static const String dacSanDetailScreen= 'dac-san-detail-screen';
 }
