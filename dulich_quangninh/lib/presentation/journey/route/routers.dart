@@ -25,7 +25,7 @@ RouteFactory routers() {
       case NamedRouters.splashScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider.value(
-                  value: locator<AppBloc>()..add(GetApplicationData()),
+                  value: locator<AppBloc>(),
                   child: SplashScreen(),
                 ));
         break;

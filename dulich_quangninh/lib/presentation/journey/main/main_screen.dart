@@ -21,29 +21,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: _index,
-        children: [
-          HomeScreen(widget.coverImages, widget.mapDiTichs),
-          SettingsScreen()
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _index,
-        onTap: (i) {
-          setState(() {
-            _index = i;
-          });
-        },
-        elevation: 5,
-        selectedItemColor: Colors.white,
-        backgroundColor: Colors.blue,
-        unselectedItemColor: Colors.white54,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Trang chủ'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Cá nhân'),
-        ],
-      ),
+      body:   HomeScreen(widget.coverImages, widget.mapDiTichs),
     );
   }
 }
