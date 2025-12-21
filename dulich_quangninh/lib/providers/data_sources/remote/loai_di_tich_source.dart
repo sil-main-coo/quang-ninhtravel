@@ -17,6 +17,7 @@ class LoaiDiTichSource {
     List<LoaiDiTichModel> list = [];
 
     try {
+      print('getLoaiDiTichs');
       final snapshot = await _databaseReference.once();
       debugPrint('getLoaiDiTichs : ${snapshot.value}');
       if (snapshot.value != null) {
@@ -33,6 +34,7 @@ class LoaiDiTichSource {
 
       return list;
     } catch (e) {
+      debugPrint(e.toString());
       throw e;
     }
   }
