@@ -9,7 +9,7 @@ class ThemeDialog {
   static ShapeBorder shapeBorder = RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(13.0),
       side: const BorderSide(color: AppColor.white));
-  static TextStyle titleTextStyle = ThemeText.getDefaultTextTheme().subhead
+  static TextStyle titleTextStyle = ThemeText.getDefaultTextTheme().subtitle1
       .copyWith(fontWeight: FontWeight.bold, color: Colors.black);
   static TextStyle contentTextStyle =
       ThemeText.getDefaultTextTheme().caption.copyWith(color: Colors.black);

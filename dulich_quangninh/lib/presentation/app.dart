@@ -59,18 +59,19 @@ class _AppState extends State<App> {
             onGenerateRoute: routers(),
             home: BlocBuilder<AuthCubit, AuthState>(
               builder: (context, state) {
-                if (state is AuthLoaded) {
-                  if (state.user != null) {
-                    return SplashScreen();
-                  }
-                  return SignInScreen();
-                }
-
-                return Scaffold(
-                  body: Center(
-                    child: const CircularProgressIndicator(),
-                  ),
-                );
+                return SplashScreen();
+                // if (state is AuthLoaded) {
+                //   // if (state.user != null) {
+                //     return SplashScreen();
+                //   // }
+                //   // return SignInScreen();
+                // }
+                //
+                // return Scaffold(
+                //   body: Center(
+                //     child: const CircularProgressIndicator(),
+                //   ),
+                // );
               },
             ),
           ),

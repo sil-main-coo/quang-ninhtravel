@@ -111,7 +111,7 @@ class _DacSanScreenState extends State<DacSanScreen> {
                 child: Text(
                   dacSan.name,
                   style: ThemeText.getDefaultTextTheme()
-                      .title
+                      .headline6
                       .copyWith(color: AppColor.white),
                 ),
               )

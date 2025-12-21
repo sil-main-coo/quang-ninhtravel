@@ -55,12 +55,12 @@ class _ListLuuTruWidgetState extends State<ListLuuTruWidget>
                 Text(
                   luuTruModel.name,
                   style: ThemeText.getDefaultTextTheme()
-                      .title
+                      .headline6
                       .copyWith(color: AppColor.primaryColor),
                 ),
                 Text(
                   'Địa chỉ: ${luuTruModel.address}',
-                  style: ThemeText.getDefaultTextTheme().subtitle,
+                  style: ThemeText.getDefaultTextTheme().subtitle1,
                 ),
               ],
             ),
@@ -74,14 +74,14 @@ class _ListLuuTruWidgetState extends State<ListLuuTruWidget>
                         Text(
                           'Phòng đơn: ${luuTruModel.roomPrices.singleValue}đ',
                           style: ThemeText.getDefaultTextTheme()
-                              .subtitle
+                              .subtitle1
                               .copyWith(fontWeight: FontWeight.normal),
                         ),
                       if (luuTruModel.roomPrices.doubleValue != null)
                         Text(
                           'Phòng đôi: ${luuTruModel.roomPrices.doubleValue}đ',
                           style: ThemeText.getDefaultTextTheme()
-                              .subtitle
+                              .subtitle1
                               .copyWith(fontWeight: FontWeight.normal),
                         ),
                     ],
@@ -123,7 +123,7 @@ class _ListLuuTruWidgetState extends State<ListLuuTruWidget>
 
   Widget _backWidget(LuuTruModel luuTruModel) {
     final bodyStyle = ThemeText.getDefaultTextTheme()
-        .subtitle
+        .subtitle1
         .copyWith(fontWeight: FontWeight.normal);
 
     return Column(
@@ -133,7 +133,7 @@ class _ListLuuTruWidgetState extends State<ListLuuTruWidget>
           Text(
             '${luuTruModel.contact.position}: ${luuTruModel.contact.fullName}',
             style: ThemeText.getDefaultTextTheme()
-                .title
+                .headline6
                 .copyWith(color: AppColor.primaryDarkColor),
           ),
           VerticalSpace.init8(),
@@ -151,7 +151,7 @@ class _ListLuuTruWidgetState extends State<ListLuuTruWidget>
   }
 
   Widget _phoneWidget(String phone) {
-    final phoneStyle = ThemeText.getDefaultTextTheme().subtitle.copyWith(
+    final phoneStyle = ThemeText.getDefaultTextTheme().subtitle1.copyWith(
           fontWeight: FontWeight.bold,
           decoration: TextDecoration.underline,
         );

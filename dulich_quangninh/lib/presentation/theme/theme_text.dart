@@ -19,36 +19,32 @@ class ThemeText {
   // Default Text Style Following Guideline
 
   static TextTheme getDefaultTextTheme() => TextTheme(
-      display4: TextStyle(
+      headline1: TextStyle(
           fontSize: 38.sp,
           fontWeight: FontWeight.bold,
           color: AppColor.textColor),
-      display3: TextStyle(
+      headline3: TextStyle(
           fontSize: 32.sp,
           fontWeight: FontWeight.normal,
           color: AppColor.textColor),
-      display2: TextStyle(
+      headline2: TextStyle(
           fontSize: 26.sp,
           fontWeight: FontWeight.normal,
           color: AppColor.textColor),
-      display1: TextStyle(
+      bodyText1: TextStyle(
           fontSize: 22.sp,
           fontWeight: FontWeight.normal,
           color: AppColor.textColor),
-      headline: TextStyle(
+      headline5: TextStyle(
           fontSize: 44.0.sp,
           fontWeight: FontWeight.bold,
           color: AppColor.textColor),
-      title: TextStyle(
+      headline6: TextStyle(
           fontSize: 27.sp,
           fontWeight: FontWeight.bold,
           color: AppColor.textColor),
-      body1: TextStyle(
-          fontSize: 18.sp,
-          fontWeight: FontWeight.normal,
-          color: AppColor.textColor),
-      body2: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600),
-      subhead: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.normal),
+      bodyText2: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600),
+      subtitle1: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.normal),
       caption: TextStyle(
           fontSize: 15.sp,
           fontWeight: FontWeight.normal,
@@ -59,10 +55,6 @@ class ThemeText {
           fontWeight: FontWeight.normal,
           letterSpacing: 0.4,
           color: AppColor.iconColorGrey),
-      subtitle: TextStyle(
-          fontSize: 24.sp,
-          fontWeight: FontWeight.w600,
-          color: AppColor.textColor),
       button: TextStyle(
           fontSize: 16.sp, fontWeight: FontWeight.bold, color: AppColor.white));
 }

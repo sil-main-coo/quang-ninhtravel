@@ -95,7 +95,7 @@ class ListMenuHomeWidget extends StatelessWidget {
               child: Text(
                 title,
                 style: ThemeText.getDefaultTextTheme()
-                    .title
+                    .headline6
                     .copyWith(color: AppColor.white),
               ),
             ),
@@ -143,7 +143,7 @@ class ListMenuHomeWidget extends StatelessWidget {
                 child: Text(
                   diTich.name,
                   style: ThemeText.getDefaultTextTheme()
-                      .title
+                      .headline6
                       .copyWith(color: AppColor.white),
                 ),
               )

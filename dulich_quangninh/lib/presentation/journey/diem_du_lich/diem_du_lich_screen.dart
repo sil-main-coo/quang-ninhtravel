@@ -87,7 +87,7 @@ class _DiemDuLichScreenState extends State<DiemDuLichScreen> {
         (index) => Text(
               '${diem.priceList[index].name}: ${diem.priceList[index].amount}${diem.priceList[index].amount.contains('/') ? '' : 'đ'}',
               style: ThemeText.getDefaultTextTheme()
-                  .subtitle
+                  .subtitle1
                   .copyWith(fontWeight: FontWeight.normal),
             ));
 
@@ -101,12 +101,12 @@ class _DiemDuLichScreenState extends State<DiemDuLichScreen> {
             Text(
               diem.name,
               style: ThemeText.getDefaultTextTheme()
-                  .title
+                  .headline6
                   .copyWith(color: AppColor.primaryColor),
             ),
             Text(
               'Địa chỉ: ${diem.address}',
-              style: ThemeText.getDefaultTextTheme().subtitle,
+              style: ThemeText.getDefaultTextTheme().subtitle1,
             ),
           ],
         ),
@@ -150,7 +150,7 @@ class _DiemDuLichScreenState extends State<DiemDuLichScreen> {
 
   Widget _backWidget(DiemDuLichModel diem) {
     final bodyStyle = ThemeText.getDefaultTextTheme()
-        .subtitle
+        .subtitle1
         .copyWith(fontWeight: FontWeight.normal);
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -159,7 +159,7 @@ class _DiemDuLichScreenState extends State<DiemDuLichScreen> {
           Text(
             '${diem.contact.position}: ${diem.contact.fullName}',
             style: ThemeText.getDefaultTextTheme()
-                .title
+                .headline6
                 .copyWith(color: AppColor.primaryDarkColor),
           ),
           VerticalSpace.init8(),
@@ -176,7 +176,7 @@ class _DiemDuLichScreenState extends State<DiemDuLichScreen> {
   }
 
   Widget _phoneWidget(String phone) {
-    final phoneStyle = ThemeText.getDefaultTextTheme().subtitle.copyWith(
+    final phoneStyle = ThemeText.getDefaultTextTheme().subtitle1.copyWith(
           fontWeight: FontWeight.bold,
           decoration: TextDecoration.underline,
         );

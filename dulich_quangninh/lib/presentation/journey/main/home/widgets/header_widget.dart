@@ -51,7 +51,7 @@ class _HeaderHomeWidgetState extends State<HeaderHomeWidget>
       VerticalSpace.init8(),
       Text('Đông Triều - Quảng Ninh',
           style: ThemeText.getDefaultTextTheme()
-              .headline
+              .headline5
               .copyWith(color: AppColor.primaryColor))
     ]);
   }

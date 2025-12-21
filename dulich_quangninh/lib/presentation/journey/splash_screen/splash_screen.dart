@@ -56,7 +56,7 @@ class SplashScreen extends StatelessWidget {
                     Text(
                       'Đông Triều - Quảng Ninh',
                       style: ThemeText.getDefaultTextTheme()
-                          .headline
+                          .headline5
                           .copyWith(color: AppColor.white),
                     ),
                     VerticalSpace.init8(),

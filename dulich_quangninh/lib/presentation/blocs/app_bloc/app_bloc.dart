@@ -29,11 +29,18 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   Stream<AppState> _getAppData() async* {
+
+    try{
+    print('>> _getAppData');
     final listDiTich = await diTichRepo.getAllDiTich();
+    print('>> listDiTich: $listDiTich');
     final coverImages = await imageRepo.getCoverImages();
 
     print('>> cover: $coverImages');
 
     yield AppDataLoadedState(mapDiTichs: listDiTich, coverImages: coverImages);
+    }catch(e){
+      print('>> e: $e');
+    }
   }
 }

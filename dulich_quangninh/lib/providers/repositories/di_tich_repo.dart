@@ -21,6 +21,8 @@ class DiTichRepoImpl implements DiTichRepo {
 
   @override
   Future<Map<LoaiDiTichModel, List<DiTichModel>>> getAllDiTich() async {
+    print('>> getAllDiTich');
+    try{
     Map<LoaiDiTichModel, List<DiTichModel>> map = {};
 
     final loaiDiTichs = await loaiDiTichSource.getLoaiDiTichs();
@@ -30,5 +32,9 @@ class DiTichRepoImpl implements DiTichRepo {
     }
 
     return map;
+    }catch(e){
+      print('>> e: $e');
+      throw e;
+    }
   }
 }

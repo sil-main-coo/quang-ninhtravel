@@ -51,7 +51,7 @@ class ButtonHomeWidget extends StatelessWidget {
             VerticalSpace.init4(),
             Text(
               text,
-              style: ThemeText.getDefaultTextTheme().body2,
+              style: ThemeText.getDefaultTextTheme().bodyText2,
             ),
           ],
         ),

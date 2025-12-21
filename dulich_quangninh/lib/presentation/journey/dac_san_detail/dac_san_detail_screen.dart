@@ -145,7 +145,7 @@ class _DacSanDetailScreenState extends State<DacSanDetailScreen> {
               child: Text(
                 '*Một số hình ảnh về ${widget.dacSanModel.name}:',
                 style: ThemeText.getDefaultTextTheme()
-                    .body1
+                    .bodyText1
                     .copyWith(fontSize: 22.sp),
               )),
           VerticalSpace.init4(),
