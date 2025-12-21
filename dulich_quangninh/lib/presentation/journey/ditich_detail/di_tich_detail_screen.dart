@@ -119,19 +119,19 @@ class _DiTichDetailScreenState extends State<DiTichDetailScreen> {
                   children: [
                     _headerWidget(),
                     _htmlWidget(),
-                    CommentComponent(
-                      idPost: widget.diTichModel.id,
-                      streamComments: _diTichSource
-                          .streamCommentsWithID(widget.diTichModel.id),
-                      handleComment: (String content) {
-                        _diTichSource.addNewCommentToDB(
-                            widget.diTichModel.id,
-                            Comment(
-                                uid: _authCubit.user.profile.id,
-                                fullName: _authCubit.user.profile.fullName,
-                                content: content));
-                      },
-                    )
+                    // CommentComponent(
+                    //   idPost: widget.diTichModel.id,
+                    //   streamComments: _diTichSource
+                    //       .streamCommentsWithID(widget.diTichModel.id),
+                    //   handleComment: (String content) {
+                    //     _diTichSource.addNewCommentToDB(
+                    //         widget.diTichModel.id,
+                    //         Comment(
+                    //             uid: _authCubit.user.profile.id,
+                    //             fullName: _authCubit.user.profile.fullName,
+                    //             content: content));
+                    //   },
+                    // )
                   ],
                 ),
               ),

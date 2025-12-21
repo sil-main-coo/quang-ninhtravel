@@ -17,6 +17,11 @@ allprojects {
         google()
         mavenCentral()
     }
+    configurations.all {
+        resolutionStrategy {
+            force "org.bouncycastle:bcprov-jdk15on:1.64"
+        }
+    }
 }
 
 rootProject.buildDir = '../build'

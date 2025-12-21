@@ -99,19 +99,19 @@ class _DacSanDetailScreenState extends State<DacSanDetailScreen> {
                   children: [
                     _headerWidget(),
                     _htmlWidget(),
-                    CommentComponent(
-                      idPost: widget.dacSanModel.id,
-                      streamComments: _dacSanSource
-                          .streamCommentsWithID(widget.dacSanModel.id),
-                      handleComment: (String content) {
-                        _dacSanSource.addNewCommentToDB(
-                            widget.dacSanModel.id,
-                            Comment(
-                                uid: _authCubit.user.profile.id,
-                                fullName: _authCubit.user.profile.fullName,
-                                content: content));
-                      },
-                    )
+                    // CommentComponent(
+                    //   idPost: widget.dacSanModel.id,
+                    //   streamComments: _dacSanSource
+                    //       .streamCommentsWithID(widget.dacSanModel.id),
+                    //   handleComment: (String content) {
+                    //     _dacSanSource.addNewCommentToDB(
+                    //         widget.dacSanModel.id,
+                    //         Comment(
+                    //             uid: _authCubit.user.profile.id,
+                    //             fullName: _authCubit.user.profile.fullName,
+                    //             content: content));
+                    //   },
+                    // )
                   ],
                 ),
               ),
