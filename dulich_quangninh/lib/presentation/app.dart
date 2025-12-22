@@ -54,7 +54,7 @@ class _AppState extends State<App> {
           },
           child: MaterialApp(
             navigatorKey: App.navigator,
-            title: 'Du lịch Đông Triều',
+            title: 'Về miền di sản',
             theme: appTheme(buildContext),
             onGenerateRoute: routers(),
             home: BlocBuilder<AuthCubit, AuthState>(

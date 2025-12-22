@@ -18,7 +18,10 @@ class DiemDuLichSource {
       if (snapshot.value != null) {
         final listValue = snapshot.value as List;
         listValue.forEach((value) {
-          list.add(DiemDuLichModel.fromJson(value));
+          if(value != null) {
+            print(value);
+            list.add(DiemDuLichModel.fromJson(value));
+          }
         });
       }
       return list;

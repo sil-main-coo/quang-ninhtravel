@@ -33,7 +33,7 @@ class _DacSanScreenState extends State<DacSanScreen> {
       tag: 'hero2',
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Đặc sản ẩm thực'),
+          title: Text('Đặc sản - Hoa'),
           automaticallyImplyLeading: false,
           actions: [
             IconButton(

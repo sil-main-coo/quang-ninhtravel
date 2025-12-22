@@ -49,7 +49,7 @@ class _HeaderHomeWidgetState extends State<HeaderHomeWidget>
     return Column(children: [
       slideWidget,
       VerticalSpace.init8(),
-      Text('Đông Triều - Quảng Ninh',
+      Text('Bình Khê - Quảng Ninh',
           style: ThemeText.getDefaultTextTheme()
               .headline5
               .copyWith(color: AppColor.primaryColor))

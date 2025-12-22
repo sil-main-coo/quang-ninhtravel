@@ -13,8 +13,8 @@ class ServiceModel extends Equatable {
   ServiceModel({this.type, this.name, this.address, this.location});
 
   ServiceModel.fromJson(Map json) {
-    type = json['type'];
-    name = json['name'];
+    type = json['type'] !=null ? json['type'].toString() : '';
+    name =  json['name'] !=null ? json['name'].toString() : '';
     typeName = json['type-name'];
     address = json['address'];
     contact =

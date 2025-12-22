@@ -10,7 +10,7 @@
         </intent>
     </queries>
    <application
-        android:label="Du lịch Đông Triều"
+        android:label="Về miền di sản"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

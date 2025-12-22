@@ -63,6 +63,7 @@ class DacSanSource {
     var images = await _refImageStorage.child(type).child(tag).listAll();
     if (images.items.isNotEmpty) {
       images.items.forEach((element) async {
+        print(element);
         final url = await element.getDownloadURL();
         urls.add(url);
       });

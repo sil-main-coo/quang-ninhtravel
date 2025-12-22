@@ -1,16 +1,37 @@
-# dulichquangninh
+# Lỗi youtube 153
 
-A new Flutter application.
+Tìm tệp: Trong các thư mục phụ thuộc đã được lưu vào bộ nhớ cache (hoặc trong một nhánh cục bộ), hãy tìm tệp đó raw_youtube_player.dart.
+Chỉnh sửa trình xử lý JavaScript: Tìm dòng addJavaScriptHandlerchứa 'Errors'.
+Sửa đổi mã: Thay đổi mã để xử lý cả hai loại một cách an toàn:
 
-## Getting Started
+```agsl
+// OLD CODE:
+..addJavaScriptHandler(
+  handlerName: 'Errors',
+  callback: (args) {
+    controller!.updateValue(
+      controller!.value.copyWith(errorCode: args.first as int),
+    );
+  },
+)
 
-This project is a starting point for a Flutter application.
+// NEW FIXED CODE:
+..addJavaScriptHandler(
+  handlerName: 'Errors',
+  callback: (args) {
+    // Safely parse the error code regardless of whether it is an int or String
+    final errorData = args.first;
+    int parsedErrorCode = 0;
+    
+    if (errorData is int) {
+      parsedErrorCode = errorData;
+    } else if (errorData is String) {
+      parsedErrorCode = int.tryParse(errorData) ?? 0;
+    }
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+    controller!.updateValue(
+      controller!.value.copyWith(errorCode: parsedErrorCode),
+    );
+  },
+)
+```

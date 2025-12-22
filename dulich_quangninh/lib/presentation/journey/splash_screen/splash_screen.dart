@@ -54,7 +54,7 @@ class SplashScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Đông Triều - Quảng Ninh',
+                      'Bình Khê - Quảng Ninh',
                       style: ThemeText.getDefaultTextTheme()
                           .headline5
                           .copyWith(color: AppColor.white),

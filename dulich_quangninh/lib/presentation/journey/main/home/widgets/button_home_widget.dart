@@ -24,7 +24,7 @@ class ButtonHomeWidget extends StatelessWidget {
               'Điểm du lịch',
               () =>
                   Navigator.pushNamed(context, NamedRouters.diemDuLichScreen)),
-          _buttonWidget('hero2', IconConstants.icFood, 'Đặc sản',
+          _buttonWidget('hero2', IconConstants.icFood, 'Nông sản - Hoa',
               () => Navigator.pushNamed(context, NamedRouters.dacSanScreen)),
 //          _buttonWidget('hero2', Icons.map, 'Bản đồ', () {}),
         ],
