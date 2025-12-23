@@ -1,4 +1,3 @@
-import 'package:dulichquangninh/providers/models/comment.dart';
 import 'package:equatable/equatable.dart';
 
 class DacSanModel extends Equatable {
@@ -10,14 +9,12 @@ class DacSanModel extends Equatable {
   String? video;
   String? html;
   List<String>? images;
-  List<Comment>? comments;
 
   DacSanModel(
       {this.name,
         this.tag,
         this.type,
-        this.video,
-        this.comments});
+        this.video,});
 
   DacSanModel.fromJson(String id, Map json) {
     this.id = id;
@@ -29,12 +26,6 @@ class DacSanModel extends Equatable {
     typeName = json['type-name'];
     images = json['images'];
     video = json['video'];
-
-    if (json['comments'] != null) {
-      comments = [];
-      (json['comments'] as Map)
-          .forEach((id, js) => comments?.add(Comment.fromJson(Map.from(js))));
-    }
   }
 
   Map<String, dynamic> toJson() {
