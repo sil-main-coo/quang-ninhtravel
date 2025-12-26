@@ -29,16 +29,14 @@ class DacSanSource {
       if (snapshot.value != null) {
         final map = snapshot.value as Map;
 
-        final futures = map.entries.map((entry) async {
+        for (final entry in map.entries) {
           final dacsan = DacSanModel.fromJson(entry.key, entry.value);
           dacsan.images = await _getImageURLs(
             dacsan.type ?? '',
             dacsan.tag ?? '',
           );
-          return dacsan;
-        });
-
-        list = await Future.wait(futures);
+          list.add(dacsan);
+        }
       }
       debugPrint('DacSan length 2= ${list.length}');
       return list;

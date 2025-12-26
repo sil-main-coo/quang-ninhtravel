@@ -6,6 +6,7 @@ import 'package:dulichquangninh/presentation/journey/diem_den_nghi_duong/nghi_du
 import 'package:dulichquangninh/presentation/journey/hoi_nhap/bloc/hoi_nhap_bloc.dart';
 import 'package:dulichquangninh/presentation/journey/hoi_nhap/hoi_nhap_screen.dart';
 import 'package:dulichquangninh/presentation/journey/main/main_screen.dart';
+import 'package:dulichquangninh/presentation/journey/phi_vat_the/phi_vat_the_detail/phi_vat_the_detail_screen.dart';
 import 'package:dulichquangninh/presentation/journey/phi_vat_the/phi_vat_the_screen.dart';
 import 'package:dulichquangninh/presentation/journey/route/named_routers.dart';
 import 'package:dulichquangninh/presentation/journey/sign_up/sign_up_screen.dart';
@@ -138,6 +139,27 @@ RouteFactory routers() {
           pageBuilder: (BuildContext context, Animation<double> animation,
               Animation<double> secondaryAnimation) {
             return DacSanDetailScreen(dacSanModel);
+          },
+          transitionsBuilder: (BuildContext context,
+              Animation<double> animation,
+              Animation<double> secondaryAnimation,
+              Widget child) {
+            return Align(
+              child: FadeTransition(
+                opacity: animation,
+                child: child,
+              ),
+            );
+          },
+        );
+      case NamedRouters.phiVatTheDetailScreen:
+        final args = settings.arguments as Map<String, dynamic>;
+        final item = args[ArgKeyConstants.phiVatTheModel];
+        return PageRouteBuilder(
+          transitionDuration: const Duration(milliseconds: 1000),
+          pageBuilder: (BuildContext context, Animation<double> animation,
+              Animation<double> secondaryAnimation) {
+            return PhiVatTheDetailScreen(item);
           },
           transitionsBuilder: (BuildContext context,
               Animation<double> animation,

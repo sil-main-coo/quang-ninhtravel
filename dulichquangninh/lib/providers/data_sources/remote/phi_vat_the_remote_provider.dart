@@ -9,7 +9,7 @@ import '../../models/phi_vat_the_model.dart';
 class PhiVatTheSource {
   final _databaseReference = FirebaseDatabase.instance
       .ref()
-      .child(FirebaseConstants.phiVatThesCollect);
+      .child(FirebaseConstants.phiVatTheCollect);
 
   final _refImageStorage =
       FirebaseStorage.instance.ref().child(FirebaseConstants.imagesStorage);
@@ -30,11 +30,15 @@ class PhiVatTheSource {
       final snapshot = (await _databaseReference.once()).snapshot;
       if (snapshot.value != null) {
         final map = snapshot.value as Map;
-        map.forEach((key, value) async {
-          final item = PhiVatTheModel.fromJson(key, value);
-          item.images = await _getImageURLs(item.type ?? '', item.tag ?? '');
+
+        for (final entry in map.entries) {
+          final item = PhiVatTheModel.fromJson(entry.key, entry.value);
+          item.images = await _getImageURLs(
+            item.type ?? '',
+            item.tag ?? '',
+          );
           list.add(item);
-        });
+        }
       }
       return list;
     } catch (e) {
@@ -47,10 +51,10 @@ class PhiVatTheSource {
 
     var images = await _refImageStorage.child(type).child(tag).listAll();
     if (images.items.isNotEmpty) {
-      images.items.forEach((element) async {
+      for(var  element in images.items) {
         final url = await element.getDownloadURL();
         urls.add(url);
-      });
+      }
     }
     return urls;
   }

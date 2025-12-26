@@ -11,4 +11,5 @@ class NamedRouters{
   static const String diemDuLichScreen= 'diem-du-lich-screen';
   static const String dacSanScreen= 'dac-san-screen';
   static const String dacSanDetailScreen= 'dac-san-detail-screen';
+  static const String phiVatTheDetailScreen= 'phi-vat-the-detail-screen';
 }

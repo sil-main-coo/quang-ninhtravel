@@ -28,6 +28,8 @@ class PhiVatTheBloc extends Bloc<PhiVatTheEvent, PhiVatTheState> {
     try {
       final data = await phiVatTheRepo.getAllPhiVatThe();
 
+      debugPrint('PhiVatThe length = ${data.length}');
+
       emit(PhiVatTheLoadedState(phiVatThes: data));
     } catch (e) {
       debugPrint(e.toString());

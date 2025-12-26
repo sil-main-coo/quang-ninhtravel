@@ -72,10 +72,10 @@ class DiTichSource {
 
     var images = await _refImageStorage.child(type ?? '').child(tag ?? '').listAll();
     if (images.items.isNotEmpty) {
-      images.items.forEach((element) async {
+      for(var element in images.items) {
         final url = await element.getDownloadURL();
         urls.add(url);
-      });
+      }
     }
     return urls;
   }

@@ -77,8 +77,8 @@ class _PhiVatTheScreenState extends State<PhiVatTheScreen> {
     final height = 72.h;
 
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, NamedRouters.dacSanDetailScreen,
-          arguments: {ArgKeyConstants.dacSanModel: phiVatThe}),
+      onTap: () => Navigator.pushNamed(context, NamedRouters.phiVatTheDetailScreen,
+          arguments: {ArgKeyConstants.phiVatTheModel: phiVatThe}),
       child: Container(
         height: height,
         margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16),
