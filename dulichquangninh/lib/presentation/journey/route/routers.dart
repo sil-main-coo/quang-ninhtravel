@@ -6,6 +6,7 @@ import 'package:dulichquangninh/presentation/journey/diem_den_nghi_duong/nghi_du
 import 'package:dulichquangninh/presentation/journey/hoi_nhap/bloc/hoi_nhap_bloc.dart';
 import 'package:dulichquangninh/presentation/journey/hoi_nhap/hoi_nhap_screen.dart';
 import 'package:dulichquangninh/presentation/journey/main/main_screen.dart';
+import 'package:dulichquangninh/presentation/journey/phi_vat_the/phi_vat_the_screen.dart';
 import 'package:dulichquangninh/presentation/journey/route/named_routers.dart';
 import 'package:dulichquangninh/presentation/journey/sign_up/sign_up_screen.dart';
 import 'package:dulichquangninh/presentation/journey/splash_screen/splash_screen.dart';
@@ -45,6 +46,8 @@ RouteFactory routers() {
         final mapDiTich = args[ArgKeyConstants.diTichMap];
 
         return MaterialPageRoute(builder: (context) => VatTheScreen(mapDiTich));
+      case NamedRouters.phiVatThe:
+        return MaterialPageRoute(builder: (context) => PhiVatTheScreen());
       case NamedRouters.hoiNhap:
         final args = settings.arguments as Map<String, dynamic>;
         final khaiQuat = args[ArgKeyConstants.khaiQuat];
@@ -129,7 +132,7 @@ RouteFactory routers() {
         final args = settings.arguments as Map<String, dynamic>;
         final dacSanModel = args[ArgKeyConstants.dacSanModel];
         return PageRouteBuilder(
-          transitionDuration: Duration(milliseconds: 1000),
+          transitionDuration: const Duration(milliseconds: 1000),
           pageBuilder: (BuildContext context, Animation<double> animation,
               Animation<double> secondaryAnimation) {
             return DacSanDetailScreen(dacSanModel);

@@ -34,7 +34,6 @@ class LuuTruSource {
           .orderByChild(FirebaseConstants.luuTruKey)
           .equalTo(type)
           .once()).snapshot;
-      debugPrint('getLuuTruByType : ${snapshot.value}');
 
       if (snapshot.value != null) {
         if (snapshot.value is List) {

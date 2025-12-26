@@ -5,9 +5,11 @@ class FirebaseConstants{
   static const String loaiLuuTruCollect = 'loai-luu-tru';
   static const String luuTrusCollect = 'luu-trus';
   static const String dacSansCollect = 'dac-sans';
+  static const String phiVatThesCollect = 'phi-vat-thes';
 
   static const String diTichKey = 'type';
   static const String luuTruKey = 'type';
+  static const String phiVatTheKey = 'type';
 
   static const String appStorageKey = 'dulich-quangninh';
   static const String imagesStorage = '$appStorageKey/images';
