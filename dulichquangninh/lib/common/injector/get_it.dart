@@ -1,9 +1,6 @@
 import 'package:dulichquangninh/common/session/shared_pref_manager.dart';
 import 'package:dulichquangninh/presentation/blocs/app_bloc/app_bloc.dart';
-import 'package:dulichquangninh/presentation/journey/dac_san/bloc/dac_san_bloc.dart';
-import 'package:dulichquangninh/presentation/journey/diem_du_lich/bloc/diem_du_lich_bloc.dart';
 import 'package:dulichquangninh/presentation/journey/hoi_nhap/bloc/hoi_nhap_bloc.dart';
-import 'package:dulichquangninh/presentation/journey/luu_tru/bloc/luu_tru_bloc.dart';
 import 'package:dulichquangninh/providers/data_sources/remote/auth_remote_provider.dart';
 import 'package:dulichquangninh/providers/data_sources/remote/dac_san_remote_provider.dart';
 import 'package:dulichquangninh/providers/data_sources/remote/di_tich_source.dart';
@@ -18,6 +15,10 @@ import 'package:dulichquangninh/providers/repositories/diem_du_lich_repo.dart';
 import 'package:dulichquangninh/providers/repositories/image_repo.dart';
 import 'package:dulichquangninh/providers/repositories/luu_tru_repo.dart';
 import 'package:get_it/get_it.dart';
+
+import '../../presentation/journey/diem_den_nghi_duong/diem_du_lich/bloc/diem_du_lich_bloc.dart';
+import '../../presentation/journey/diem_den_nghi_duong/nghi_duong/bloc/luu_tru_bloc.dart';
+import '../../presentation/journey/hoi_nhap/dac_san/bloc/dac_san_bloc.dart';
 
 GetIt locator = GetIt.instance;
 

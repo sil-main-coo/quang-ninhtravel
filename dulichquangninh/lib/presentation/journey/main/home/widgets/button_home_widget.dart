@@ -32,7 +32,7 @@ class ButtonHomeWidget extends StatelessWidget {
       ),
       children: [
         _buttonWidget(
-          'hero',
+          'hero_hoi_nhap',
           IconConstants.icHotel,
           'Hội nhập và phát triển',
           () => Navigator.pushNamed(context, NamedRouters.hoiNhap, arguments: {
@@ -40,15 +40,15 @@ class ButtonHomeWidget extends StatelessWidget {
           }),
         ),
         _buttonWidget(
-            'hero1',
+            'hero_diem_den',
             IconConstants.icLocation,
             'Điểm đến - Nghỉ dưỡng',
             () => Navigator.pushNamed(context, NamedRouters.luuTruScreen)),
-        _buttonWidget('hero2', IconConstants.icHotel, 'Văn hoá vật thể',
+        _buttonWidget('hero_vat_the', IconConstants.icHotel, 'Văn hoá vật thể',
             () => Navigator.pushNamed(context, NamedRouters.vatThe, arguments: {
               ArgKeyConstants.diTichMap: mapDiTichs
             })),
-        _buttonWidget('hero3', IconConstants.icFood, 'Văn hoá phi vật thể',
+        _buttonWidget('hero_phi_vat_the', IconConstants.icFood, 'Văn hoá phi vật thể',
             () => Navigator.pushNamed(context, NamedRouters.dacSanScreen)),
         // _buttonWidget('hero', IconConstants.icHotel, 'Lưu trú',
         //     () => Navigator.pushNamed(context, NamedRouters.luuTruScreen),

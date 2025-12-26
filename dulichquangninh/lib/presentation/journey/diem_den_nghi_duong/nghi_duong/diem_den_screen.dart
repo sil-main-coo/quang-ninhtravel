@@ -1,19 +1,19 @@
 import 'package:dulichquangninh/common/injector/get_it.dart';
-import 'package:dulichquangninh/presentation/journey/diem_du_lich/diem_du_lich_screen.dart';
-import 'package:dulichquangninh/presentation/journey/luu_tru/widgets/list_luutru_widget.dart';
 import 'package:dulichquangninh/providers/models/loai_luu_tru_model.dart';
 import 'package:dulichquangninh/providers/models/luu_tru_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../diem_du_lich/diem_du_lich_screen.dart';
 import 'bloc/luu_tru_bloc.dart';
+import 'widgets/list_luutru_widget.dart';
 
-class LuuTruScreen extends StatefulWidget {
+class DiemDenScreen extends StatefulWidget {
   @override
-  _LuuTruScreenState createState() => _LuuTruScreenState();
+  _DiemDenScreenState createState() => _DiemDenScreenState();
 }
 
-class _LuuTruScreenState extends State<LuuTruScreen> {
+class _DiemDenScreenState extends State<DiemDenScreen> {
   final _bloc = locator<LuuTruBloc>();
 
   @override
@@ -26,20 +26,20 @@ class _LuuTruScreenState extends State<LuuTruScreen> {
   @override
   Widget build(BuildContext context) {
     return Hero(
-      tag: 'hero',
+      tag: 'hero_diem_den',
       child: DefaultTabController(
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            title: Text('Điểm đến - Nghỉ dưỡng'),
+            title: const Text('Điểm đến - Nghỉ dưỡng'),
             automaticallyImplyLeading: false,
             actions: [
               IconButton(
-                icon: Icon(Icons.close),
+                icon: const Icon(Icons.close),
                 onPressed: () => Navigator.pop(context),
               ),
             ],
-            bottom: TabBar(
+            bottom: const TabBar(
               indicatorColor: Colors.orange,
               tabs: [
                 Tab(
@@ -64,8 +64,8 @@ class _LuuTruScreenState extends State<LuuTruScreen> {
                 return _bodyTabBar(state.mapLuuTru);
               }
 
-              return Center(
-                child: const CircularProgressIndicator(),
+              return const Center(
+                child: CircularProgressIndicator(),
               );
             },
           ),

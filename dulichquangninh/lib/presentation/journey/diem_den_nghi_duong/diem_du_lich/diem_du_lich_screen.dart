@@ -1,6 +1,5 @@
 import 'package:dulichquangninh/common/injector/get_it.dart';
 import 'package:dulichquangninh/common/utils/map_util.dart';
-import 'package:dulichquangninh/presentation/journey/luu_tru/widgets/card_item_widget.dart';
 import 'package:dulichquangninh/presentation/journey/widgets/space_widgets/vertical_space_widget.dart';
 import 'package:dulichquangninh/presentation/theme/theme_color.dart';
 import 'package:dulichquangninh/presentation/theme/theme_text.dart';
@@ -10,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../nghi_duong/widgets/card_item_widget.dart';
 import 'bloc/diem_du_lich_bloc.dart';
 
 class DiemDuLichScreen extends StatefulWidget {

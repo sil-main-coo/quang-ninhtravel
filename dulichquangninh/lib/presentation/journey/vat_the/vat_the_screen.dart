@@ -27,7 +27,7 @@ class _VatTheScreenState extends State<VatTheScreen> {
   @override
   Widget build(BuildContext context) {
     return Hero(
-      tag: 'hero2',
+      tag: 'hero_vat_the',
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Văn hoá vật thể'),

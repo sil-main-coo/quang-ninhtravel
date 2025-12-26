@@ -1,18 +1,18 @@
 import 'package:dulichquangninh/common/injector/get_it.dart';
 import 'package:dulichquangninh/presentation/app.dart';
 import 'package:dulichquangninh/presentation/blocs/app_bloc/app_bloc.dart';
-import 'package:dulichquangninh/presentation/journey/dac_san/dac_san_screen.dart';
-import 'package:dulichquangninh/presentation/journey/dac_san_detail/dac_san_detail_screen.dart';
-import 'package:dulichquangninh/presentation/journey/diem_du_lich/diem_du_lich_screen.dart';
-import 'package:dulichquangninh/presentation/journey/ditich_detail/di_tich_detail_screen.dart';
+import 'package:dulichquangninh/presentation/journey/diem_den_nghi_duong/diem_du_lich/diem_du_lich_screen.dart';
+import 'package:dulichquangninh/presentation/journey/diem_den_nghi_duong/nghi_duong/diem_den_screen.dart';
 import 'package:dulichquangninh/presentation/journey/hoi_nhap/hoi_nhap_screen.dart';
-import 'package:dulichquangninh/presentation/journey/luu_tru/luu_tru_screen.dart';
 import 'package:dulichquangninh/presentation/journey/main/main_screen.dart';
 import 'package:dulichquangninh/presentation/journey/route/named_routers.dart';
 import 'package:dulichquangninh/presentation/journey/sign_up/sign_up_screen.dart';
 import 'package:dulichquangninh/presentation/journey/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../hoi_nhap/dac_san/dac_san_screen.dart';
+import '../hoi_nhap/dac_san_detail/dac_san_detail_screen.dart';
+import '../vat_the/ditich_detail/di_tich_detail_screen.dart';
 import '../vat_the/vat_the_screen.dart';
 import 'argument_key_constants.dart';
 
@@ -77,7 +77,7 @@ RouteFactory routers() {
           transitionDuration: Duration(milliseconds: 1000),
           pageBuilder: (BuildContext context, Animation<double> animation,
               Animation<double> secondaryAnimation) {
-            return LuuTruScreen();
+            return DiemDenScreen();
           },
           transitionsBuilder: (BuildContext context,
               Animation<double> animation,

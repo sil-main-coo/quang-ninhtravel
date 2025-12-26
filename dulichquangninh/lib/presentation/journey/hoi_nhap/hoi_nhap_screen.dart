@@ -39,7 +39,7 @@ class _HoiNhapScreenState extends State<HoiNhapScreen> {
   @override
   Widget build(BuildContext context) {
     return Hero(
-      tag: 'hero2',
+      tag: 'hero_hoi_nhap',
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Hội nhập & Phát triển'),

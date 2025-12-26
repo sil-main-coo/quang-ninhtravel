@@ -1,10 +1,11 @@
 import 'dart:math';
 
-import 'package:dulichquangninh/presentation/journey/luu_tru/widgets/triangle_widget.dart';
 import 'package:dulichquangninh/presentation/theme/theme_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'triangle_widget.dart';
 
 class CardItemWidget extends StatefulWidget {
   final Widget frontWidget;
