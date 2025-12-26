@@ -2,11 +2,8 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dulichquangninh/common/constants/image_constants.dart';
-import 'package:dulichquangninh/common/injector/get_it.dart';
-import 'package:dulichquangninh/presentation/journey/hoi_nhap/widgets/list_menu_widget.dart';
 import 'package:dulichquangninh/presentation/journey/route/argument_key_constants.dart';
 import 'package:dulichquangninh/presentation/journey/route/named_routers.dart';
-import 'package:dulichquangninh/presentation/journey/widgets/loader/circular_progress_widget.dart';
 import 'package:dulichquangninh/presentation/theme/theme_color.dart';
 import 'package:dulichquangninh/presentation/theme/theme_text.dart';
 import 'package:dulichquangninh/providers/models/dac_san_model.dart';
@@ -15,26 +12,15 @@ import 'package:dulichquangninh/providers/models/loai_di_tich_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../vat_the/widgets/list_menu_widget.dart';
+import '../widgets/loader/circular_progress_widget.dart';
 import '../widgets/space_widgets/vertical_space_widget.dart';
 import 'bloc/hoi_nhap_bloc.dart';
 
-class HoiNhapScreen extends StatefulWidget {
+class HoiNhapScreen extends StatelessWidget {
   final ({LoaiDiTichModel menu, List<DiTichModel> list}) khaiQuat;
 
   const HoiNhapScreen(this.khaiQuat, {super.key});
-
-  @override
-  _HoiNhapScreenState createState() => _HoiNhapScreenState();
-}
-
-class _HoiNhapScreenState extends State<HoiNhapScreen> {
-  final _bloc = locator<HoiNhapBloc>();
-
-  @override
-  void initState() {
-    super.initState();
-    _bloc.add(GetHoiNhapData(khaiQuat: widget.khaiQuat));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,14 +37,13 @@ class _HoiNhapScreenState extends State<HoiNhapScreen> {
             )
           ],
         ),
-        body: BlocBuilder(
-          bloc: _bloc,
+        body: BlocBuilder<HoiNhapBloc, HoiNhapState>(
           builder: (context, state) {
             if (state is HoiNhapFailureState) {
               return _error();
             }
             if (state is HoiNhapLoadedState && state.dacsans.isNotEmpty) {
-              return _buildContent(state);
+              return _buildContent(context, state);
             }
 
             return const Center(
@@ -76,31 +61,31 @@ class _HoiNhapScreenState extends State<HoiNhapScreen> {
     );
   }
 
-  Widget _buildContent(HoiNhapLoadedState state) {
+  Widget _buildContent(BuildContext context, HoiNhapLoadedState state) {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Column(
         children: [
-          _itemKhaiQuatWidget(widget.khaiQuat.menu, widget.khaiQuat.list),
+          _itemKhaiQuatWidget(context, khaiQuat.menu, khaiQuat.list),
           _itemDacSanWidget(context, state.dacsans),
         ],
       ),
     );
   }
 
-  Widget _itemKhaiQuatWidget(LoaiDiTichModel menu, List<DiTichModel> list) {
+  Widget _itemKhaiQuatWidget(BuildContext context, LoaiDiTichModel menu, List<DiTichModel> list) {
     return Column(
       children: [
         Card3(
           _parentItem(menu.name ?? '', menu.image),
-          _buildListKhaiQuat(list),
+          _buildListKhaiQuat(context, list),
         ),
         VerticalSpace.init4()
       ],
     );
   }
 
-  Widget _buildListKhaiQuat(List<DiTichModel> khaiQuats) {
+  Widget _buildListKhaiQuat(BuildContext context, List<DiTichModel> khaiQuats) {
     return Column(
         children: List<Widget>.generate(
             khaiQuats.length,
@@ -122,14 +107,14 @@ class _HoiNhapScreenState extends State<HoiNhapScreen> {
       children: [
         Card3(
           _parentItem('Đặc sản', dacsans.first.images?.first),
-          _buildListDacSan(dacsans),
+          _buildListDacSan(context, dacsans),
         ),
         VerticalSpace.init4()
       ],
     );
   }
 
-  Widget _buildListDacSan(List<DacSanModel> dacsans) {
+  Widget _buildListDacSan(BuildContext context, List<DacSanModel> dacsans) {
     return Column(
         children: List<Widget>.generate(
             dacsans.length,

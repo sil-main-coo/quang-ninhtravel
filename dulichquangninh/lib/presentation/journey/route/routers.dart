@@ -3,6 +3,7 @@ import 'package:dulichquangninh/presentation/app.dart';
 import 'package:dulichquangninh/presentation/blocs/app_bloc/app_bloc.dart';
 import 'package:dulichquangninh/presentation/journey/diem_den_nghi_duong/diem_du_lich/diem_du_lich_screen.dart';
 import 'package:dulichquangninh/presentation/journey/diem_den_nghi_duong/nghi_duong/diem_den_screen.dart';
+import 'package:dulichquangninh/presentation/journey/hoi_nhap/bloc/hoi_nhap_bloc.dart';
 import 'package:dulichquangninh/presentation/journey/hoi_nhap/hoi_nhap_screen.dart';
 import 'package:dulichquangninh/presentation/journey/main/main_screen.dart';
 import 'package:dulichquangninh/presentation/journey/route/named_routers.dart';
@@ -43,19 +44,23 @@ RouteFactory routers() {
         final args = settings.arguments as Map<String, dynamic>;
         final mapDiTich = args[ArgKeyConstants.diTichMap];
 
-        return MaterialPageRoute(
-            builder: (context) => VatTheScreen(mapDiTich));
+        return MaterialPageRoute(builder: (context) => VatTheScreen(mapDiTich));
       case NamedRouters.hoiNhap:
         final args = settings.arguments as Map<String, dynamic>;
         final khaiQuat = args[ArgKeyConstants.khaiQuat];
 
         return MaterialPageRoute(
-            builder: (context) => HoiNhapScreen(khaiQuat));
+            builder: (context) => BlocProvider<HoiNhapBloc>(
+                create: (ct) => locator<HoiNhapBloc>()
+                  ..add(
+                    GetHoiNhapData(khaiQuat: khaiQuat),
+                  ),
+                child: HoiNhapScreen(khaiQuat)));
       case NamedRouters.diTichDetailScreen:
         final args = settings.arguments as Map<String, dynamic>;
         final diTichModel = args[ArgKeyConstants.diTichModel];
         return PageRouteBuilder(
-          transitionDuration: Duration(milliseconds: 1000),
+          transitionDuration: const Duration(milliseconds: 1000),
           pageBuilder: (BuildContext context, Animation<double> animation,
               Animation<double> secondaryAnimation) {
             return DiTichDetailScreen(diTichModel);
