@@ -29,35 +29,20 @@ class _DiemDuLichScreenState extends State<DiemDuLichScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: 'hero1',
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Điểm du lịch'),
-          automaticallyImplyLeading: false,
-          actions: [
-            IconButton(
-              icon: Icon(Icons.close),
-              onPressed: () => Navigator.pop(context),
-            )
-          ],
-        ),
-        body: BlocBuilder(
-          bloc: _bloc,
-          builder: (context, state) {
-            if (state is DiemDuLichFailureState) {
-              return _error();
-            }
-            if (state is DiemDuLichLoadedState) {
-              return _bodyTabBar(state.list);
-            }
+    return BlocBuilder(
+      bloc: _bloc,
+      builder: (context, state) {
+        if (state is DiemDuLichFailureState) {
+          return _error();
+        }
+        if (state is DiemDuLichLoadedState) {
+          return _bodyTabBar(state.list);
+        }
 
-            return Center(
-              child: const CircularProgressIndicator(),
-            );
-          },
-        ),
-      ),
+        return Center(
+          child: const CircularProgressIndicator(),
+        );
+      },
     );
   }
 

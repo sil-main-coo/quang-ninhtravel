@@ -21,16 +21,10 @@ class ListMenuHomeWidget extends StatelessWidget {
   ListMenuHomeWidget(this.mapDiTichs) {
     this.loaiDiTichs = mapDiTichs.keys.toList();
 
-    // đưa khai quat lên đầu
-    final indexIntro =
-        loaiDiTichs.indexWhere((element) => element.tag == 'khai-quat');
-    this.loaiDiTichs.insert(0, loaiDiTichs[indexIntro]);
-    this.loaiDiTichs.removeAt(indexIntro + 1);
-
-    // đưa chùa thứ 2
+    // đưa chùa thứ 1
     final indexChua =
     loaiDiTichs.indexWhere((element) => element.tag == 'chua');
-    this.loaiDiTichs.insert(1, loaiDiTichs[indexChua]);
+    this.loaiDiTichs.insert(0, loaiDiTichs[indexChua]);
     this.loaiDiTichs.removeAt(indexChua + 1);
 
     // đưa di tích xuống dưới
@@ -43,6 +37,7 @@ class ListMenuHomeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      physics: const BouncingScrollPhysics(),
         itemCount: loaiDiTichs.length,
         primary: false,
         shrinkWrap: true,

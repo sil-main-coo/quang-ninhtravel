@@ -14,11 +14,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // ignore: must_be_immutable
-class ListMenuHomeWidget extends StatelessWidget {
+class HoiNhapPhatTrienMenuWidget extends StatelessWidget {
   final Map<LoaiDiTichModel, List<DiTichModel>> mapDiTichs;
   List<LoaiDiTichModel> loaiDiTichs = [];
 
-  ListMenuHomeWidget(this.mapDiTichs) {
+  HoiNhapPhatTrienMenuWidget(this.mapDiTichs) {
     this.loaiDiTichs = mapDiTichs.keys.toList();
 
     // đưa khai quat lên đầu

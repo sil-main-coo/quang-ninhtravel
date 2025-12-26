@@ -5,6 +5,7 @@ import 'package:dulichquangninh/presentation/journey/dac_san/dac_san_screen.dart
 import 'package:dulichquangninh/presentation/journey/dac_san_detail/dac_san_detail_screen.dart';
 import 'package:dulichquangninh/presentation/journey/diem_du_lich/diem_du_lich_screen.dart';
 import 'package:dulichquangninh/presentation/journey/ditich_detail/di_tich_detail_screen.dart';
+import 'package:dulichquangninh/presentation/journey/hoi_nhap/hoi_nhap_screen.dart';
 import 'package:dulichquangninh/presentation/journey/luu_tru/luu_tru_screen.dart';
 import 'package:dulichquangninh/presentation/journey/main/main_screen.dart';
 import 'package:dulichquangninh/presentation/journey/route/named_routers.dart';
@@ -12,12 +13,11 @@ import 'package:dulichquangninh/presentation/journey/sign_up/sign_up_screen.dart
 import 'package:dulichquangninh/presentation/journey/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../vat_the/vat_the_screen.dart';
 import 'argument_key_constants.dart';
 
 RouteFactory routers() {
   return (RouteSettings settings) {
-
-
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (context) => App());
@@ -35,9 +35,22 @@ RouteFactory routers() {
         final args = settings.arguments as Map<String, dynamic>;
         final coverImages = args[ArgKeyConstants.coverImages];
         final mapDiTich = args[ArgKeyConstants.diTichMap];
+        final khaiQuat = args[ArgKeyConstants.khaiQuat];
 
         return MaterialPageRoute(
-            builder: (context) => MainScreen(coverImages, mapDiTich));
+            builder: (context) => MainScreen(coverImages, mapDiTich, khaiQuat));
+      case NamedRouters.vatThe:
+        final args = settings.arguments as Map<String, dynamic>;
+        final mapDiTich = args[ArgKeyConstants.diTichMap];
+
+        return MaterialPageRoute(
+            builder: (context) => VatTheScreen(mapDiTich));
+      case NamedRouters.hoiNhap:
+        final args = settings.arguments as Map<String, dynamic>;
+        final khaiQuat = args[ArgKeyConstants.khaiQuat];
+
+        return MaterialPageRoute(
+            builder: (context) => HoiNhapScreen(khaiQuat));
       case NamedRouters.diTichDetailScreen:
         final args = settings.arguments as Map<String, dynamic>;
         final diTichModel = args[ArgKeyConstants.diTichModel];

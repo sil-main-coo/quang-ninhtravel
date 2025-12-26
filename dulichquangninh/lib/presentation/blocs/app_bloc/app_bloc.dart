@@ -21,23 +21,26 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     on<GetApplicationData>(_onGetApplicationData);
   }
 
-
-  Future<void>  _onGetApplicationData(
-      GetApplicationData event,
-      Emitter<AppState> emit,
+  Future<void> _onGetApplicationData(
+    GetApplicationData event,
+    Emitter<AppState> emit,
   ) async {
-    try{
-      print('>> _getAppData');
+    try {
       final listDiTich = await diTichRepo.getAllDiTich();
-      print('>> listDiTich: $listDiTich');
       final coverImages = await imageRepo.getCoverImages();
 
-      print('>> cover: $coverImages');
+      final khaiQuatMenu =
+          listDiTich.keys.firstWhere((element) => element.tag == 'khai-quat');
+      final khaiQuatList = listDiTich[khaiQuatMenu];
 
-      emit(AppDataLoadedState(mapDiTichs: listDiTich, coverImages: coverImages));
-    }catch(e){
+      listDiTich.remove(khaiQuatMenu);
+
+      emit(AppDataLoadedState(
+          mapDiTichs: listDiTich,
+          khaiQuat: (menu: khaiQuatMenu, list: khaiQuatList ?? []),
+          coverImages: coverImages));
+    } catch (e) {
       print('>> e: $e');
     }
   }
-
 }

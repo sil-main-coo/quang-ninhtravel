@@ -3,6 +3,9 @@ class NamedRouters{
   static const String signInScreen = 'sign-in';
   static const String signUpScreen = 'sign-up';
   static const String mainScreen = 'main-screen';
+  static const String hoiNhap = 'hoi-nhap';
+  static const String vatThe = 'vat-the';
+  static const String phiVatThe = 'phi-vat-the';
   static const String diTichDetailScreen= 'di-tich-detail-screen';
   static const String luuTruScreen= 'luu-tru-screen';
   static const String diemDuLichScreen= 'diem-du-lich-screen';

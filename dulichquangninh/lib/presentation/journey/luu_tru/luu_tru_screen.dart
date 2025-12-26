@@ -1,4 +1,5 @@
 import 'package:dulichquangninh/common/injector/get_it.dart';
+import 'package:dulichquangninh/presentation/journey/diem_du_lich/diem_du_lich_screen.dart';
 import 'package:dulichquangninh/presentation/journey/luu_tru/widgets/list_luutru_widget.dart';
 import 'package:dulichquangninh/providers/models/loai_luu_tru_model.dart';
 import 'package:dulichquangninh/providers/models/luu_tru_model.dart';
@@ -30,7 +31,7 @@ class _LuuTruScreenState extends State<LuuTruScreen> {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            title: Text('Lưu trú'),
+            title: Text('Điểm đến - Nghỉ dưỡng'),
             automaticallyImplyLeading: false,
             actions: [
               IconButton(
@@ -41,6 +42,9 @@ class _LuuTruScreenState extends State<LuuTruScreen> {
             bottom: TabBar(
               indicatorColor: Colors.orange,
               tabs: [
+                Tab(
+                  child: Text('Điểm du lịch'),
+                ),
                 Tab(
                   child: Text('Khách sạn'),
                 ),
@@ -80,7 +84,7 @@ class _LuuTruScreenState extends State<LuuTruScreen> {
     final List<Widget> widgets =
         mapLuuTru.entries.map((e) => ListLuuTruWidget(e.key, e.value)).toList();
     return TabBarView(
-      children: widgets,
+      children: [DiemDuLichScreen(), ...widgets],
     );
   }
 }

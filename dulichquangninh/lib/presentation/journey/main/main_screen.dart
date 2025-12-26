@@ -7,8 +7,9 @@ import 'home/home_screen.dart';
 class MainScreen extends StatefulWidget {
   final List<String> coverImages;
   final Map<LoaiDiTichModel, List<DiTichModel>> mapDiTichs;
+  final ({LoaiDiTichModel menu, List<DiTichModel> list}) khaiQuat;
 
-  MainScreen(this.coverImages, this.mapDiTichs);
+  MainScreen(this.coverImages, this.mapDiTichs, this.khaiQuat);
 
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -20,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:   HomeScreen(widget.coverImages, widget.mapDiTichs),
+      body:   HomeScreen(widget.coverImages, widget.mapDiTichs, widget.khaiQuat),
     );
   }
 }

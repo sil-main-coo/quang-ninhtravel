@@ -22,7 +22,8 @@ class SplashScreen extends StatelessWidget {
                   context, NamedRouters.mainScreen, (route) => false,
                   arguments: {
                     ArgKeyConstants.coverImages: typeState.coverImages,
-                    ArgKeyConstants.diTichMap: typeState.mapDiTichs
+                    ArgKeyConstants.diTichMap: typeState.mapDiTichs,
+                    ArgKeyConstants.khaiQuat: typeState.khaiQuat,
                   });
               break;
             case AppLoadFailureState:

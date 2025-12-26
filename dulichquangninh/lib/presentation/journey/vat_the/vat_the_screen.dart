@@ -1,39 +1,36 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dulichquangninh/common/constants/image_constants.dart';
 import 'package:dulichquangninh/common/injector/get_it.dart';
+import 'package:dulichquangninh/presentation/journey/hoi_nhap/widgets/list_menu_widget.dart';
 import 'package:dulichquangninh/presentation/journey/route/argument_key_constants.dart';
 import 'package:dulichquangninh/presentation/journey/route/named_routers.dart';
 import 'package:dulichquangninh/presentation/journey/widgets/loader/circular_progress_widget.dart';
 import 'package:dulichquangninh/presentation/theme/theme_color.dart';
 import 'package:dulichquangninh/presentation/theme/theme_text.dart';
 import 'package:dulichquangninh/providers/models/dac_san_model.dart';
+import 'package:dulichquangninh/providers/models/di_tich_model.dart';
+import 'package:dulichquangninh/providers/models/loai_di_tich_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'bloc/dac_san_bloc.dart';
 
-class DacSanScreen extends StatefulWidget {
+class VatTheScreen extends StatefulWidget {
+  final Map<LoaiDiTichModel, List<DiTichModel>> mapDiTichs;
+  
+  VatTheScreen(this.mapDiTichs);
+  
   @override
-  _DacSanScreenState createState() => _DacSanScreenState();
+  _VatTheScreenState createState() => _VatTheScreenState();
 }
 
-class _DacSanScreenState extends State<DacSanScreen> {
-  final _bloc = locator<DacSanBloc>();
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _bloc.add(const GetDacSanData());
-  }
-
+class _VatTheScreenState extends State<VatTheScreen> {
   @override
   Widget build(BuildContext context) {
     return Hero(
       tag: 'hero2',
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Hội nhập và phát triển'),
+          title: const Text('Văn hoá vật thể'),
           automaticallyImplyLeading: false,
           actions: [
             IconButton(
@@ -42,21 +39,7 @@ class _DacSanScreenState extends State<DacSanScreen> {
             )
           ],
         ),
-        body: BlocBuilder(
-          bloc: _bloc,
-          builder: (context, state) {
-            if (state is DacSanFailureState) {
-              return _error();
-            }
-            if (state is DacSanLoadedState) {
-              return _buildListDacSan(state.dacsans);
-            }
-
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          },
-        ),
+        body:        ListMenuHomeWidget(widget.mapDiTichs),
       ),
     );
   }

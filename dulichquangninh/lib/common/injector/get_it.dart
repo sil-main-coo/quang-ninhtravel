@@ -2,6 +2,7 @@ import 'package:dulichquangninh/common/session/shared_pref_manager.dart';
 import 'package:dulichquangninh/presentation/blocs/app_bloc/app_bloc.dart';
 import 'package:dulichquangninh/presentation/journey/dac_san/bloc/dac_san_bloc.dart';
 import 'package:dulichquangninh/presentation/journey/diem_du_lich/bloc/diem_du_lich_bloc.dart';
+import 'package:dulichquangninh/presentation/journey/hoi_nhap/bloc/hoi_nhap_bloc.dart';
 import 'package:dulichquangninh/presentation/journey/luu_tru/bloc/luu_tru_bloc.dart';
 import 'package:dulichquangninh/providers/data_sources/remote/auth_remote_provider.dart';
 import 'package:dulichquangninh/providers/data_sources/remote/dac_san_remote_provider.dart';
@@ -27,6 +28,7 @@ void setupLocator() {
   locator
       .registerLazySingleton(() => DiemDuLichBloc(diemDuLichRepo: locator()));
   locator.registerLazySingleton(() => DacSanBloc(dacSanRepo: locator()));
+  locator.registerFactory(() => HoiNhapBloc(dacSanRepo: locator()));
 
   // repository
   locator.registerFactory<DiTichRepo>(() => DiTichRepoImpl(

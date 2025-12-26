@@ -21,16 +21,10 @@ class ListMenuHomeWidget extends StatelessWidget {
   ListMenuHomeWidget(this.mapDiTichs) {
     this.loaiDiTichs = mapDiTichs.keys.toList();
 
-    // đưa khai quat lên đầu
-    final indexIntro =
-        loaiDiTichs.indexWhere((element) => element.tag == 'khai-quat');
-    this.loaiDiTichs.insert(0, loaiDiTichs[indexIntro]);
-    this.loaiDiTichs.removeAt(indexIntro + 1);
-
-    // đưa chùa thứ 2
+    // đưa chùa thứ 1
     final indexChua =
-    loaiDiTichs.indexWhere((element) => element.tag == 'chua');
-    this.loaiDiTichs.insert(1, loaiDiTichs[indexChua]);
+        loaiDiTichs.indexWhere((element) => element.tag == 'chua');
+    this.loaiDiTichs.insert(0, loaiDiTichs[indexChua]);
     this.loaiDiTichs.removeAt(indexChua + 1);
 
     // đưa di tích xuống dưới
@@ -43,6 +37,7 @@ class ListMenuHomeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+        physics: const BouncingScrollPhysics(),
         itemCount: loaiDiTichs.length,
         primary: false,
         shrinkWrap: true,
@@ -56,8 +51,10 @@ class ListMenuHomeWidget extends StatelessWidget {
       List<DiTichModel> diTichs) {
     return Column(
       children: [
-        Card3(_parentItem(loaiDiTich.name ?? '', loaiDiTich.image ?? ''),
-            _buildList(context, diTichs)),
+        Card3(
+          _parentItem(loaiDiTich.name ?? '', loaiDiTich.image ?? ''),
+          _buildList(context, diTichs),
+        ),
         VerticalSpace.init4()
       ],
     );
@@ -101,8 +98,8 @@ class ListMenuHomeWidget extends StatelessWidget {
               child: Text(
                 title,
                 style: ThemeText.getDefaultTextTheme()
-                    .headline6
-                    !.copyWith(color: AppColor.white),
+                    .headline6!
+                    .copyWith(color: AppColor.white),
               ),
             ),
           )
@@ -132,9 +129,9 @@ class ListMenuHomeWidget extends StatelessWidget {
                     )
                   : CachedNetworkImage(
                       imageUrl: diTich.images![0],
-                      progressIndicatorBuilder:
-                          (context, url, downloadProgress) =>
-                              AppCircularProgress(downloadProgress.progress ?? 0),
+                      progressIndicatorBuilder: (context, url,
+                              downloadProgress) =>
+                          AppCircularProgress(downloadProgress.progress ?? 0),
                       errorWidget: (context, url, error) => Icon(Icons.error),
                       fit: BoxFit.fill,
                       width: ScreenUtil().screenWidth,
@@ -149,8 +146,8 @@ class ListMenuHomeWidget extends StatelessWidget {
                 child: Text(
                   diTich.name ?? '',
                   style: ThemeText.getDefaultTextTheme()
-                      .headline6
-                      !.copyWith(color: AppColor.white),
+                      .headline6!
+                      .copyWith(color: AppColor.white),
                 ),
               )
             ],
