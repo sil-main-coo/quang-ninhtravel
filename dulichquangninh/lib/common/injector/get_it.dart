@@ -60,5 +60,5 @@ void setupLocator() {
   locator
       .registerLazySingleton(() => DiemDuLichBloc(diemDuLichRepo: locator()));
   locator.registerLazySingleton(() => DacSanBloc(dacSanRepo: locator()));
-  locator.registerFactory(() => HoiNhapBloc(dacSanRepo: locator()));
+  locator.registerLazySingleton(() => HoiNhapBloc(dacSanRepo: locator()));
 }

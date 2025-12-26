@@ -3,11 +3,11 @@ import 'package:dulichquangninh/common/error/remote_exception.dart';
 import 'package:dulichquangninh/providers/models/dac_san_model.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 
 class DacSanSource {
-  final _databaseReference = FirebaseDatabase.instance
-      .ref()
-      .child(FirebaseConstants.dacSansCollect);
+  final _databaseReference =
+      FirebaseDatabase.instance.ref().child(FirebaseConstants.dacSansCollect);
 
   final _refImageStorage =
       FirebaseStorage.instance.ref().child(FirebaseConstants.imagesStorage);
@@ -26,15 +26,21 @@ class DacSanSource {
 
     try {
       final snapshot = (await _databaseReference.once()).snapshot;
-      print(snapshot.value);
       if (snapshot.value != null) {
         final map = snapshot.value as Map;
-        map.forEach((key, value) async {
-          final dacsan = DacSanModel.fromJson(key, value);
-          dacsan.images = await _getImageURLs(dacsan.type ?? '', dacsan.tag ?? '');
-          list.add(dacsan);
+
+        final futures = map.entries.map((entry) async {
+          final dacsan = DacSanModel.fromJson(entry.key, entry.value);
+          dacsan.images = await _getImageURLs(
+            dacsan.type ?? '',
+            dacsan.tag ?? '',
+          );
+          return dacsan;
         });
+
+        list = await Future.wait(futures);
       }
+      debugPrint('DacSan length 2= ${list.length}');
       return list;
     } catch (e) {
       throw e;

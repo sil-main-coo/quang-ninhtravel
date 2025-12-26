@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dulichquangninh/common/constants/image_constants.dart';
+import 'package:dulichquangninh/common/injector/get_it.dart';
 import 'package:dulichquangninh/presentation/journey/route/argument_key_constants.dart';
 import 'package:dulichquangninh/presentation/journey/route/named_routers.dart';
 import 'package:dulichquangninh/presentation/theme/theme_color.dart';
@@ -17,40 +18,53 @@ import '../widgets/loader/circular_progress_widget.dart';
 import '../widgets/space_widgets/vertical_space_widget.dart';
 import 'bloc/hoi_nhap_bloc.dart';
 
-class HoiNhapScreen extends StatelessWidget {
+class HoiNhapScreen extends StatefulWidget {
   final ({LoaiDiTichModel menu, List<DiTichModel> list}) khaiQuat;
 
   const HoiNhapScreen(this.khaiQuat, {super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Hero(
-      tag: 'hero_hoi_nhap',
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Hội nhập & Phát triển'),
-          automaticallyImplyLeading: false,
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.close),
-              onPressed: () => Navigator.pop(context),
-            )
-          ],
-        ),
-        body: BlocBuilder<HoiNhapBloc, HoiNhapState>(
-          builder: (context, state) {
-            if (state is HoiNhapFailureState) {
-              return _error();
-            }
-            if (state is HoiNhapLoadedState && state.dacsans.isNotEmpty) {
-              return _buildContent(context, state);
-            }
+  _HoiNhapScreenState createState() => _HoiNhapScreenState();
+}
 
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          },
-        ),
+class _HoiNhapScreenState extends State<HoiNhapScreen> {
+  final _bloc = locator<HoiNhapBloc>();
+
+  @override
+  void initState() {
+    super.initState();
+    _bloc.add(GetHoiNhapData(khaiQuat: widget.khaiQuat));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Hội nhập & Phát triển'),
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.close),
+            onPressed: () => Navigator.pop(context),
+          )
+        ],
+      ),
+      body: BlocBuilder(
+        bloc: _bloc,
+        builder: (context, state) {
+          if (state is HoiNhapFailureState) {
+            return _error();
+          }
+
+          if (state is HoiNhapLoadedState) {
+            debugPrint('DacSan length 1= ${state.dacsans.length}');
+            return _buildContent(context, state);
+          }
+
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
       ),
     );
   }
@@ -66,14 +80,17 @@ class HoiNhapScreen extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       child: Column(
         children: [
-          _itemKhaiQuatWidget(context, khaiQuat.menu, khaiQuat.list),
-          _itemDacSanWidget(context, state.dacsans),
+          _itemKhaiQuatWidget(context, widget.khaiQuat.menu,  widget.khaiQuat.list),
+
+          if (state.dacsans.isNotEmpty)
+            _itemDacSanWidget(context, state.dacsans),
         ],
       ),
     );
   }
 
-  Widget _itemKhaiQuatWidget(BuildContext context, LoaiDiTichModel menu, List<DiTichModel> list) {
+  Widget _itemKhaiQuatWidget(
+      BuildContext context, LoaiDiTichModel menu, List<DiTichModel> list) {
     return Column(
       children: [
         Card3(

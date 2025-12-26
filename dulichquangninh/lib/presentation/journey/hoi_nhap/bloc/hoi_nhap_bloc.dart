@@ -17,7 +17,6 @@ class HoiNhapBloc extends Bloc<HoiNhapEvent, HoiNhapState> {
   }
 
   final DacSanRepo dacSanRepo;
-  List<DacSanModel> _dacsans = [];
 
   Future<void> _onGetDacSanData(
     GetHoiNhapData event,
@@ -25,8 +24,9 @@ class HoiNhapBloc extends Bloc<HoiNhapEvent, HoiNhapState> {
   ) async {
     emit(HoiNhapUnKnowState());
     try {
+      final dacsans = await dacSanRepo.getAllDacSan();
 
-        final dacsans = await dacSanRepo.getAllDacSan();
+      debugPrint('DacSan length = ${dacsans.length}');
 
       emit(HoiNhapLoadedState(dacsans: dacsans, khaiQuat: event.khaiQuat));
     } catch (e) {

@@ -34,7 +34,7 @@ class ButtonHomeWidget extends StatelessWidget {
       children: [
         _buttonWidget(
           'hero_hoi_nhap',
-          IconConstants.icHotel,
+          IconConstants.icBook,
           'Hội nhập và phát triển',
           () => Navigator.pushNamed(context, NamedRouters.hoiNhap,
               arguments: {ArgKeyConstants.khaiQuat: khaiQuat}),
@@ -52,7 +52,7 @@ class ButtonHomeWidget extends StatelessWidget {
                 arguments: {ArgKeyConstants.diTichMap: mapDiTichs})),
         _buttonWidget(
             'hero_phi_vat_the',
-            IconConstants.icFood,
+            IconConstants.icMerge,
             'Văn hoá phi vật thể',
             () => Navigator.pushNamed(context, NamedRouters.phiVatThe)),
         // _buttonWidget('hero', IconConstants.icHotel, 'Lưu trú',

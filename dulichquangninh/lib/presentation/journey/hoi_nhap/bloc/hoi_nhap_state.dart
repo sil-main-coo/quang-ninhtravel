@@ -23,7 +23,7 @@ class HoiNhapLoadedState extends HoiNhapState {
   }
 
   @override
-  List<Object> get props => [dacsans, khaiQuat, timestamp];
+  List<Object> get props => [  Object.hashAll(dacsans), khaiQuat, timestamp];
 }
 
 class HoiNhapFailureState extends HoiNhapState {

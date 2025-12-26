@@ -53,12 +53,14 @@ RouteFactory routers() {
         final khaiQuat = args[ArgKeyConstants.khaiQuat];
 
         return MaterialPageRoute(
-            builder: (context) => BlocProvider<HoiNhapBloc>(
-                create: (ct) => locator<HoiNhapBloc>()
-                  ..add(
-                    GetHoiNhapData(khaiQuat: khaiQuat),
-                  ),
-                child: HoiNhapScreen(khaiQuat)));
+          builder: (context) => BlocProvider<HoiNhapBloc>(
+            create: (ct) => HoiNhapBloc(dacSanRepo: locator())
+              ..add(
+                GetHoiNhapData(khaiQuat: khaiQuat),
+              ),
+            child: HoiNhapScreen(khaiQuat),
+          ),
+        );
       case NamedRouters.diTichDetailScreen:
         final args = settings.arguments as Map<String, dynamic>;
         final diTichModel = args[ArgKeyConstants.diTichModel];
